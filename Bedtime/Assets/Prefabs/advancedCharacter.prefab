@@ -1148,8 +1148,8 @@ MonoBehaviour:
   m_gpController: {fileID: 0}
   m_heldPower: 0
   m_currentEffect: 0
-  m_acceleration: 0
-  m_speed: 0
+  m_acceleration: 4
+  m_speed: 8
   m_rotSpeed: 0
   m_camera: {fileID: 0}
 --- !u!136 &136718266205345120
