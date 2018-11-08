@@ -7,6 +7,8 @@ TagManager:
   - InternalWall
   - StartOfStairs
   - EndOfStairs
+  - SpawnPoint
+  - SpawnObject
   layers:
   - Default
   - TransparentFX
