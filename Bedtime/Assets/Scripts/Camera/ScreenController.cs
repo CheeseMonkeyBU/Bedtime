@@ -17,24 +17,39 @@ public class ScreenController : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        if(m_numPlayers <= 0 || m_numPlayers > 4)
-        {
-            m_numPlayers = 1;
-        }
-
-        m_numPlayers = gameObject.GetComponent<SpawnController>().playerCount;
-
         m_cameras = new List<GameObject>();
+	}
+	
+	// Update is called once per frame
+	void Update ()
+    {
+        if (Input.GetKeyDown("1"))
+        {
+            m_cameras[0].GetComponent<CameraController>().setOrthoSize(10, 1.0f);
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            m_cameras[0].GetComponent<CameraController>().setOrthoSize(20, 1.0f);
+        }
+        if (Input.GetKeyDown("3"))
+        {
+            m_cameras[0].GetComponent<CameraController>().setOrthoSize(30, 1.0f);
+        }
+    }
+
+    public Camera addViewport()
+    {
+        // add a new camera to the list through Instantiate
+        m_cameras.Add(Instantiate(m_cameraPrefab));
+        int newestCamera = m_cameras.Count - 1;
+        m_cameras[newestCamera].name = "Player_" + newestCamera + "_Camera";
 
         float viewportX = 0.0f;
-        float viewportWidth = 1.0f / m_numPlayers;
+        float viewportWidth = 1.0f / gameObject.GetComponent<SpawnController>().playerCount;
 
-        for(int i = 0; i < m_numPlayers; ++i)
+        // loop through all cameras to space them all out now there is a new one
+        for (int i = 0; i < m_cameras.Count; ++i)
         {
-            // add a new camera to the list through Instantiate
-            m_cameras.Add(Instantiate(m_cameraPrefab));
-            // name the camera
-            m_cameras[i].name = "Player_" + i + "_Camera";
             // grab the camera component
             Camera currentCamera = m_cameras[i].GetComponent<Camera>();
             // set the viewport position
@@ -44,28 +59,7 @@ public class ScreenController : MonoBehaviour
             // offset the viewport X for the next camera
             viewportX += viewportWidth;
         }
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (Input.GetKeyDown("1"))
-        {
-            m_cameras[0].GetComponent<CameraController>().setOrthoSize(10, 1.0f);
-            m_cameras[1].GetComponent<CameraController>().setOrthoSize(20, 1.0f);
-            m_cameras[2].GetComponent<CameraController>().setOrthoSize(30, 1.0f);
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            m_cameras[0].GetComponent<CameraController>().setOrthoSize(30, 1.0f);
-            m_cameras[1].GetComponent<CameraController>().setOrthoSize(10, 1.0f);
-            m_cameras[2].GetComponent<CameraController>().setOrthoSize(20, 1.0f);
-        }
-        if (Input.GetKeyDown("3"))
-        {
-            m_cameras[0].GetComponent<CameraController>().setOrthoSize(20, 1.0f);
-            m_cameras[1].GetComponent<CameraController>().setOrthoSize(30, 1.0f);
-            m_cameras[2].GetComponent<CameraController>().setOrthoSize(10, 1.0f);
-        }
+        Debug.Log("Number of Cameras: " + m_cameras.Count);
+        return m_cameras[newestCamera].GetComponent<Camera>();
     }
 }
