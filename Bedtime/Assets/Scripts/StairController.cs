@@ -8,7 +8,7 @@ public class StairController : MonoBehaviour {
     public List<GameObject> m_levels;
 
     private GameObject m_previous;
-    private CharacterMovement m_player;
+    //private CharacterMovement m_player;
 
 	void Start ()
     {
@@ -17,6 +17,7 @@ public class StairController : MonoBehaviour {
 	
 	void Update ()
     {
+        /*
         if(!m_player)
         {
             CharacterMovement[] chars = FindObjectsOfType<CharacterMovement>();
@@ -66,6 +67,7 @@ public class StairController : MonoBehaviour {
         {
             m_player.m_camera.orthographicSize += (18 - m_player.m_camera.orthographicSize) / 50;
         }
+        */
 	}
 
     void spawnStair()

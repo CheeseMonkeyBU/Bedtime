@@ -6,6 +6,9 @@ public class CameraController : MonoBehaviour
 {
     Camera m_cameraComponent;
 
+    float m_trauma;
+    float m_maxShakeRotation = 0.5f;
+
     // size lerp members
     bool m_isSizeTransitioning = false;
     float m_zoomSpeed = 1.0f;
@@ -24,8 +27,23 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
+        m_trauma -= 0.05f;
+        if (m_trauma < 0.0f)
+            m_trauma = 0.0f;
+
+        if(m_trauma > 0.01f)
+        {
+            gameObject.transform.Rotate(new Vector3(
+                m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f),
+                m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f),
+                m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f)));
+        }
 	}
+
+    public void addTrauma(float _trauma)
+    {
+        m_trauma += _trauma;
+    }
 
     public void setOrthoSize(float _targetSize, float _speed)
     {

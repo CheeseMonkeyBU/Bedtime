@@ -22,7 +22,6 @@ public class ScreenController : MonoBehaviour
 
     float m_viewportX;
 
-
     // Use this for initialization
     void Awake ()
     {
@@ -45,9 +44,9 @@ public class ScreenController : MonoBehaviour
         {
             removeViewport(m_cameras[Random.Range(0, m_cameras.Count - 1)]);
         }
-        if (Input.GetKeyDown("5"))
+        if (Input.GetKeyDown("space"))
         {
-            removeViewport(m_cameras[0]);
+            m_cameras[0].GetComponent<CameraController>().addTrauma(0.5f);
         }
     }
 

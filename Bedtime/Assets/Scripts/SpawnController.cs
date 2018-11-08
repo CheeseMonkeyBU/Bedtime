@@ -32,10 +32,7 @@ public class SpawnController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            spawnPlayer();
-        }
+
     }
 
     GameObject spawnPlayer()
@@ -47,7 +44,7 @@ public class SpawnController : MonoBehaviour
         player.transform.position = m_spawnPoints[spawnPointIndex].transform.position;
         //m_spawnPoints.RemoveAt(spawnPointIndex);
 
-        player.GetComponent<CharacterMovement>().m_camera = gameObject.GetComponent<ScreenController>().addViewport();
+        //player.GetComponent<CharacterMovement>().m_camera = gameObject.GetComponent<ScreenController>().addViewport();
 
         return player;
     }
