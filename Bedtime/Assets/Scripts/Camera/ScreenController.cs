@@ -8,15 +8,20 @@ public class ScreenController : MonoBehaviour
 
     [SerializeField]
     GameObject m_cameraPrefab;
-    [SerializeField]
+
+    //[SerializeField]
     List<GameObject> m_cameras;
+
     [SerializeField]
     Canvas m_canvas;
 
+    float m_border = 0.005f;
+
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
+        Debug.Log("Assigning Camera List");
         m_cameras = new List<GameObject>();
 	}
 	
@@ -29,7 +34,7 @@ public class ScreenController : MonoBehaviour
         }
         if (Input.GetKeyDown("2"))
         {
-            m_cameras[0].GetComponent<CameraController>().setOrthoSize(20, 1.0f);
+            removeViewport(0);
         }
         if (Input.GetKeyDown("3"))
         {
@@ -44,13 +49,29 @@ public class ScreenController : MonoBehaviour
         int newestCamera = m_cameras.Count - 1;
         m_cameras[newestCamera].name = "Player_" + newestCamera + "_Camera";
 
-        float border = 0.005f;
-        float borderOverall = ((gameObject.GetComponent<SpawnController>().playerCount - 1) * border);
-        Debug.Log(borderOverall);
-        Debug.Log((gameObject.GetComponent<SpawnController>().playerCount - borderOverall));
 
+        resetViewportLayout();
+
+        Debug.Log("Number of Cameras: " + m_cameras.Count);
+        return m_cameras[newestCamera].GetComponent<Camera>();
+    }
+
+    public void removeViewport(int _index)
+    {
+        m_cameras.RemoveAt(_index);
+        resetViewportLayout();
+    }
+
+    void resetViewportLayout()
+    {
         float viewportX = 0.0f;
-        float viewportWidth = (1.0f - border) / (gameObject.GetComponent<SpawnController>().playerCount);
+
+        float border = m_border;
+        if(m_cameras.Count <= 1)
+        {
+            border = 0.0f;
+        }
+        float viewportWidth = (1.0f - border) / (m_cameras.Count);
 
         // loop through all cameras to space them all out now there is a new one
         for (int i = 0; i < m_cameras.Count; ++i)
@@ -60,11 +81,13 @@ public class ScreenController : MonoBehaviour
             // set the viewport position
             currentCamera.rect = new Rect(viewportX, 0, viewportWidth, 1);
 
+            
+
 
             // offset the viewport X for the next camera
             viewportX = viewportX + viewportWidth + border;
         }
-        Debug.Log("Number of Cameras: " + m_cameras.Count);
-        return m_cameras[newestCamera].GetComponent<Camera>();
+
+        GL.Clear(true, true, new Color(0, 0, 0, 1), 1.0f);
     }
 }
