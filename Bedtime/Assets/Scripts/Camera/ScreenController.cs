@@ -44,8 +44,13 @@ public class ScreenController : MonoBehaviour
         int newestCamera = m_cameras.Count - 1;
         m_cameras[newestCamera].name = "Player_" + newestCamera + "_Camera";
 
+        float border = 0.005f;
+        float borderOverall = ((gameObject.GetComponent<SpawnController>().playerCount - 1) * border);
+        Debug.Log(borderOverall);
+        Debug.Log((gameObject.GetComponent<SpawnController>().playerCount - borderOverall));
+
         float viewportX = 0.0f;
-        float viewportWidth = 1.0f / gameObject.GetComponent<SpawnController>().playerCount;
+        float viewportWidth = (1.0f - border) / (gameObject.GetComponent<SpawnController>().playerCount);
 
         // loop through all cameras to space them all out now there is a new one
         for (int i = 0; i < m_cameras.Count; ++i)
@@ -57,7 +62,7 @@ public class ScreenController : MonoBehaviour
 
 
             // offset the viewport X for the next camera
-            viewportX += viewportWidth;
+            viewportX = viewportX + viewportWidth + border;
         }
         Debug.Log("Number of Cameras: " + m_cameras.Count);
         return m_cameras[newestCamera].GetComponent<Camera>();
