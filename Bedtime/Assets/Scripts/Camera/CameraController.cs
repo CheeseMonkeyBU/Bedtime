@@ -7,16 +7,20 @@ public class CameraController : MonoBehaviour
     Camera m_cameraComponent;
 
     float m_trauma;
-    float m_maxShakeRotation = 0.5f;
+    float m_maxShakeRotation = 1.0f;
+    Quaternion m_oldRotation;
 
     // size lerp members
     bool m_isSizeTransitioning = false;
     float m_zoomSpeed = 1.0f;
 
-	// Use this for initialization
-	void Start ()
+
+
+    // Use this for initialization
+    void Start ()
     {
         m_cameraComponent = gameObject.GetComponent<Camera>();
+        m_oldRotation = gameObject.transform.rotation;
 
         // transform it to a default position
         gameObject.transform.position = new Vector3(0, 20, 0);
@@ -27,16 +31,28 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        m_trauma -= 0.05f;
+        m_trauma -= 0.01f;
         if (m_trauma < 0.0f)
             m_trauma = 0.0f;
 
-        if(m_trauma > 0.01f)
+        if(m_trauma > 0.05f)
         {
+            
+            Quaternion rotationOffset = Quaternion.Euler(new Vector3(
+                m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f),
+                m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f),
+                m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f)));
+
             gameObject.transform.Rotate(new Vector3(
                 m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f),
                 m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f),
                 m_maxShakeRotation * Mathf.Pow(m_trauma, 2) * Random.Range(-1.0f, 1.0f)));
+
+            gameObject.transform.rotation = Quaternion.Euler(m_oldRotation.eulerAngles + rotationOffset.eulerAngles);
+        }
+        else
+        {
+            gameObject.transform.rotation = m_oldRotation;
         }
 	}
 
