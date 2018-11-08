@@ -8,10 +8,12 @@ public class Character : MonoBehaviour {
     public Camera m_camera;
 
     private Rigidbody m_rb;
+    private Animator m_anim;
 
 	void Start ()
     {
         m_rb = GetComponent<Rigidbody>();
+        m_anim = GetComponent<Animator>();
 	}
 	
 	void Update ()
@@ -24,6 +26,13 @@ public class Character : MonoBehaviour {
             Vector3 input = new Vector3(xInput, 0.0f, zInput).normalized;
             transform.rotation = Quaternion.Euler(0.0f, m_camera.transform.rotation.eulerAngles.y, 0.0f) * Quaternion.LookRotation(input);
             m_rb.AddForce(transform.rotation * new Vector3(0.0f, 0.0f, 1.0f) * m_acceleration * input.magnitude, ForceMode.Impulse);
+            m_anim.SetBool("Walk", true);
+        }
+        else
+        {
+            m_anim.SetBool("Walk", false);
+            m_rb.velocity = new Vector3(0.0f, m_rb.velocity.y, 0.0f);
+
         }
 
         float gravity = m_rb.velocity.y;
