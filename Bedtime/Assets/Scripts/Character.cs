@@ -32,7 +32,6 @@ public class Character : MonoBehaviour {
         {
             m_anim.SetBool("Walk", false);
             m_rb.velocity = new Vector3(0.0f, m_rb.velocity.y, 0.0f);
-
         }
 
         float gravity = m_rb.velocity.y;
