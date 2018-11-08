@@ -17,6 +17,12 @@ public class SpawnController : MonoBehaviour
         // look through all objects and find any that are spawn points and add them to the list of spawn points
         m_spawnPoints.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
 
+        if(m_spawnPoints.Count < playerCount)
+        {
+            Debug.LogError("Not enough spawn points for the number of players!");
+            playerCount = m_spawnPoints.Count;
+        }
+
         if (m_spawnPoints.Count <= 0)
         {
             Debug.LogError("No player spawn points found");
@@ -27,6 +33,7 @@ public class SpawnController : MonoBehaviour
             spawnPlayer();
         }
 
+        // set the viewports instantly, no smoothing
         gameObject.GetComponent<ScreenController>().setViewports();
     }
 
@@ -46,7 +53,7 @@ public class SpawnController : MonoBehaviour
 
         player.GetComponent<PlayerController>().m_camera = gameObject.GetComponent<ScreenController>().addViewport();
         GetComponent<GamePlayController>().registerPlayer(player.GetComponent<PlayerController>());
-
+         
         return player;
     }
 }

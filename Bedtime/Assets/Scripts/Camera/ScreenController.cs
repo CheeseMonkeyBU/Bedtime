@@ -46,7 +46,7 @@ public class ScreenController : MonoBehaviour
         }
         if (Input.GetKeyDown("space"))
         {
-            m_cameras[0].GetComponent<CameraController>().addTrauma(0.5f);
+            m_cameras[0].GetComponent<CameraController>().addTrauma(0.2f);
         }
     }
 
