@@ -10,7 +10,7 @@ public class StairController : MonoBehaviour {
     public float m_floorCamSize = 18, m_stairCamSize = 8;
 
     private GameObject m_previous;
-    private CharacterMovement m_player;
+    private PlayerController m_player;
 
 	void Start ()
     {
@@ -21,11 +21,11 @@ public class StairController : MonoBehaviour {
     {
         if(!m_player)
         {
-            CharacterMovement[] chars = FindObjectsOfType<CharacterMovement>();
+            PlayerController[] chars = FindObjectsOfType<PlayerController>();
             if(chars.Length == 0)
                 Debug.LogError("No players!");
             float distance = 0;
-            foreach (CharacterMovement c in chars)
+            foreach (PlayerController c in chars)
             {
                 float d = 0;
                 if (!m_player)
