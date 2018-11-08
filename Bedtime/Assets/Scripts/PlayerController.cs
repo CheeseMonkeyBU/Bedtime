@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 
 		m_rb.ResetInertiaTensor();
 
-		float xInput = Input.GetAxis("Horizontal" + m_playerNumber.ToString()), zInput = Input.GetAxis("Vertical" + m_playerNumber.ToString());
+		float xInput = Input.GetAxis("Horizontal" + (m_playerNumber + 1).ToString()), zInput = Input.GetAxis("Vertical" + (m_playerNumber + 1).ToString());
 		if (xInput != 0 || zInput != 0)
 		{
 			Vector3 input = new Vector3(xInput, 0.0f, zInput).normalized;
