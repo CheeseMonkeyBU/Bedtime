@@ -20,7 +20,7 @@ public class Character : MonoBehaviour {
     {
         m_rb.ResetInertiaTensor();
 
-        float xInput = Input.GetAxis("Horizontal"), zInput = Input.GetAxis("Vertical");
+        float xInput = Input.GetAxis("Horizontal1"), zInput = Input.GetAxis("Vertical1");
         if (xInput != 0 || zInput != 0)
         {
             Vector3 input = new Vector3(xInput, 0.0f, zInput).normalized;

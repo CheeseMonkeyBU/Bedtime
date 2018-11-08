@@ -2019,6 +2019,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114168306524748324, guid: 61340ae84b5be4a4eb0df1e7af661070,
+        type: 2}
+      propertyPath: m_levels.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4277511151177176, guid: 61340ae84b5be4a4eb0df1e7af661070, type: 2}
       propertyPath: m_LocalPosition.x
       value: -157.5
@@ -2055,6 +2060,12 @@ Prefab:
       propertyPath: m_Name
       value: Start1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114168306524748324, guid: 61340ae84b5be4a4eb0df1e7af661070,
+        type: 2}
+      propertyPath: m_levels.Array.data[0]
+      value: 
+      objectReference: {fileID: 1946772299029302, guid: af355bfdc9e1a464086c138beb7656ca,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61340ae84b5be4a4eb0df1e7af661070, type: 2}
   m_IsPrefabParent: 0
@@ -2651,7 +2662,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.36559254, g: 0.5002461, b: 0.7205882, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2730,6 +2741,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 114228440213962598, guid: 6074ec5ed202bb244bb4a13a55e9b7fa,
+        type: 2}
+      propertyPath: m_levels.Array.data[0]
+      value: 
+      objectReference: {fileID: 1946772299029302, guid: af355bfdc9e1a464086c138beb7656ca,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6074ec5ed202bb244bb4a13a55e9b7fa, type: 2}
   m_IsPrefabParent: 0

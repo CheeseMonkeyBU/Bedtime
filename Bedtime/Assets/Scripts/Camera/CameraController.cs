@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
 
     public void setOrthoSize(float _targetSize, float _speed)
     {
+        m_zoomSpeed = _speed;
         if(!m_isSizeTransitioning)
         {
             StartCoroutine("lerpOrtho", _targetSize);
