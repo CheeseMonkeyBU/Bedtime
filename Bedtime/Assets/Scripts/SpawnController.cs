@@ -42,9 +42,10 @@ public class SpawnController : MonoBehaviour
         GameObject player = Instantiate(m_playerGameObject);
 
         player.transform.position = m_spawnPoints[spawnPointIndex].transform.position;
-        //m_spawnPoints.RemoveAt(spawnPointIndex);
+        m_spawnPoints.RemoveAt(spawnPointIndex);
 
         player.GetComponent<PlayerController>().m_camera = gameObject.GetComponent<ScreenController>().addViewport();
+        GetComponent<GamePlayController>().registerPlayer(player.GetComponent<PlayerController>());
 
         return player;
     }
