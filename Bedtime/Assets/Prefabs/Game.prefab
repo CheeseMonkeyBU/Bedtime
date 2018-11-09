@@ -23,10 +23,9 @@ GameObject:
   - component: {fileID: 114873261481066266}
   - component: {fileID: 114242245703222766}
   - component: {fileID: 114773027976714458}
-  - component: {fileID: 114129922474385650}
   m_Layer: 0
   m_Name: Game
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,25 +55,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1207869564499050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.137003, y: 9, z: -8.334121}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224949465954677050}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114129922474385650
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1207869564499050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8afef7740b7db4e8dc3da250f1ef6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_players: []
 --- !u!114 &114242245703222766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,6 +74,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_players: []
+  m_freezeTime: 3
+  m_speedTime: 4
+  m_speedMultiplyer: 4
+  m_invincibleTime: 5
 --- !u!114 &114312902571663710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,6 +143,7 @@ MonoBehaviour:
     type: 2}
   m_startLevel: {fileID: 1458015290375634, guid: 61340ae84b5be4a4eb0df1e7af661070,
     type: 2}
+  m_spawnPoints: []
   playerCount: 2
 --- !u!114 &114946213731310064
 MonoBehaviour:
