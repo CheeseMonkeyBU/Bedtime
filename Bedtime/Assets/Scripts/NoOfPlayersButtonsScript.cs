@@ -10,7 +10,7 @@ public class NoOfPlayersButtonsScript : MonoBehaviour {
     public Button threePlayersButton;
     public Button fourPlayersButton;
 
-    private string sceneName = "Anim";
+    public string sceneName = "Anim";
 
 	// Use this for initialization
 	void Start () {
