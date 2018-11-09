@@ -27,9 +27,6 @@ public class GamePlayController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
-
-=======
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         if (players.Length == 0)
         {
@@ -39,7 +36,7 @@ public class GamePlayController : MonoBehaviour {
             panel.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
             panel.GetComponentInChildren<TextMeshProUGUI>().text = "Darkness envelopes you";
         }
->>>>>>> fcf893b1adf75d38719085f2cd747c10644065bb
+
     }
 
     public void registerPlayer(PlayerController _player)
@@ -49,29 +46,45 @@ public class GamePlayController : MonoBehaviour {
         m_players.Add(_player);
     }
 
-    public void applyPowerupToPlayer(int _playerID, Powerup.PowerupType _type)
+    public bool applyPowerupToPlayer(int _playerID, Powerup.PowerupType _type)
     {
+        if (!m_players[_playerID].canTakeStatusEffect())
+        {
+            Debug.Log("Failed to apply pickup, player cannot accept");
+            return false;
+        }
+        if (_playerID >= m_players.Count)
+        {
+            Debug.Log("Failed to apply pickup, player id out of range");
+            return false;
+        }
+
         if(_type == Powerup.PowerupType.Freeze)
         {
+            Debug.Log("Starting Freeze");
             StartCoroutine("usePowerupFreeze", m_players[_playerID]);
         }
         else if (_type == Powerup.PowerupType.Speed)
         {
+            Debug.Log("Starting Speed");
             StartCoroutine("usePowerupSpeed", m_players[_playerID]);
         }
         else if(_type == Powerup.PowerupType.Invincible)
         {
+            Debug.Log("Starting invincible");
             StartCoroutine("usePowerupInvincible", m_players[_playerID]);
         }
         else if (_type == Powerup.PowerupType.Obstacles)
         {
             StartCoroutine("usePowerupObstacle", m_players[_playerID]);
         }
+
+        return true;
     }
 
     public IEnumerator usePowerupFreeze(PlayerController _targetPlayer)
     {
-        if(!_targetPlayer.m_isInvincible || !_targetPlayer.m_hasStatusEffect)
+        if(_targetPlayer.canTakeStatusEffect())
         {
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
@@ -83,9 +96,6 @@ public class GamePlayController : MonoBehaviour {
             while(elapsedTime < m_freezeTime)
             {
                 canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_freezeTime));
-                Debug.Log(elapsedTime);
-                Debug.Log(m_freezeTime);
-                Debug.Log(elapsedTime / m_freezeTime);
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
@@ -102,7 +112,7 @@ public class GamePlayController : MonoBehaviour {
 
     public IEnumerator usePowerupSpeed(PlayerController _targetPlayer)
     {
-        if (!_targetPlayer.m_isInvincible || !_targetPlayer.m_hasStatusEffect)
+        if (_targetPlayer.canTakeStatusEffect())
         {
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
@@ -114,10 +124,6 @@ public class GamePlayController : MonoBehaviour {
             while (elapsedTime < m_speedTime)
             {
                 canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_speedTime));
-
-                Debug.Log(elapsedTime);
-                Debug.Log(m_speedTime);
-                Debug.Log(elapsedTime / m_speedTime);
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
@@ -135,7 +141,7 @@ public class GamePlayController : MonoBehaviour {
 
     public IEnumerator usePowerupInvincible(PlayerController _targetPlayer)
     {
-        if (!_targetPlayer.m_isInvincible || !_targetPlayer.m_hasStatusEffect)
+        if (_targetPlayer.canTakeStatusEffect())
         {
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
@@ -147,10 +153,6 @@ public class GamePlayController : MonoBehaviour {
             while (elapsedTime < m_invincibleTime)
             {
                 canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_invincibleTime));
-
-                Debug.Log(elapsedTime);
-                Debug.Log(m_invincibleTime);
-                Debug.Log(elapsedTime / m_invincibleTime);
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
