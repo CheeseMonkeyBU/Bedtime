@@ -6,6 +6,8 @@ public class SpawnController : MonoBehaviour
 {
     [SerializeField]
     GameObject m_playerGameObject;
+    [SerializeField]
+    GameObject m_startLevel;
     List<GameObject> m_spawnPoints;
 
     [SerializeField]
@@ -13,6 +15,11 @@ public class SpawnController : MonoBehaviour
 
     void Start()
     {
+        playerCount = NumberOfPlayers.numberOfPlayers;
+
+        for(int i = 0; i < playerCount; i++)
+            Instantiate(m_startLevel, new Vector3(i * 100, 0, 0), Quaternion.identity);
+
         m_spawnPoints = new List<GameObject>();
         // look through all objects and find any that are spawn points and add them to the list of spawn points
         m_spawnPoints.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));

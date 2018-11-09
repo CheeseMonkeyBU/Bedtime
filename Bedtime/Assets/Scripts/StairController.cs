@@ -10,12 +10,12 @@ public class StairController : MonoBehaviour {
     public float m_floorCamSize = 18, m_stairCamSize = 8;
 
     public GameObject m_myLevel;
+    public int m_lastLevel = -1;
 
     private List<GameObject> m_stairs;
     private GameObject m_previous;
     private PlayerController m_player;
     private bool m_old = false;
-    private int m_lastLevel = -1;
 
 	void Start ()
     {
@@ -79,10 +79,10 @@ public class StairController : MonoBehaviour {
                 }
 
                 int level = Random.Range(0, m_levels.Length);
-                while (level == m_lastLevel) { level = Random.Range(0, m_levels.Length);  }
+                while (level == m_lastLevel) { level = Random.Range(0, m_levels.Length); Debug.Log("Choosing Level"); }
+                Debug.Log("New level! Using level " + level + " out of " + m_levels.Length + ", last level was " + m_lastLevel);
                 m_lastLevel = level;
 
-                Debug.Log("New level! Using level " + level + " out of " + m_levels.Length);
                 Vector3 pos = new Vector3();
                 foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())
                     if (t.CompareTag("EndOfStairs"))
@@ -96,6 +96,7 @@ public class StairController : MonoBehaviour {
                 o.transform.position = o.transform.position + (o.transform.position - pos);
                 o.GetComponentInChildren<StairController>().m_levels = m_levels;
                 o.GetComponentInChildren<StairController>().m_myLevel = o;
+                o.GetComponentInChildren<StairController>().m_lastLevel = m_lastLevel;
 
                 m_previous = o;
                 m_old = true;
