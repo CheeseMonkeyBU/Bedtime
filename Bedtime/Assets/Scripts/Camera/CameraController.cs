@@ -10,6 +10,9 @@ public class CameraController : MonoBehaviour
     float m_maxShakeRotation = 1.0f;
     Quaternion m_oldRotation;
 
+    // the canvas for this camera
+    public GameObject canvas;
+
     // size lerp members
     bool m_isSizeTransitioning = false;
     float m_zoomSpeed = 1.0f;

@@ -18,7 +18,7 @@ public class ScreenController : MonoBehaviour
     float m_border = 0.005f;
 
     bool m_isSizeTransitioning = false;
-    float m_transitionSpeed = 5.0f;
+    float m_transitionSpeed = 2.0f;
 
     float m_viewportX;
 
@@ -75,7 +75,6 @@ public class ScreenController : MonoBehaviour
 
         StartCoroutine("addLerpViewportReset");
 
-        Debug.Log("Number of Cameras: " + m_cameras.Count);
         return m_cameras[newestCamera].GetComponent<Camera>();
     }
 
@@ -83,6 +82,7 @@ public class ScreenController : MonoBehaviour
     {
         if(m_cameras.Count > 1)
         {
+            gameObject.GetComponent<UIController>().removeCanvasByCamera(_camera);
             Destroy(_camera);
             m_cameras.Remove(_camera);
             StopCoroutine("removeLerpViewportReset");
@@ -117,7 +117,7 @@ public class ScreenController : MonoBehaviour
         m_isSizeTransitioning = false;
     }
 
-    // I dont know how this works but it does
+    // I dont know how this works but it does. Don't change or risk breaking all viewports!
     IEnumerator removeLerpViewportReset()
     {
         m_isSizeTransitioning = true;
@@ -148,6 +148,8 @@ public class ScreenController : MonoBehaviour
                 m_cameras[i].GetComponent<Camera>().rect = new Rect(lerpedViewportX, 0, lerpedWidth, 1);
                 endViewportX = endViewportX + endViewportWidth + m_border;
                 elapsedTime += Time.deltaTime;
+
+                gameObject.GetComponent<UIController>().updateCanvases();
             }
 
             yield return new WaitForEndOfFrame();

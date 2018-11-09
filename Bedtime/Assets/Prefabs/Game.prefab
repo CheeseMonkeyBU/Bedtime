@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114312902571663710}
   - component: {fileID: 114873261481066266}
   - component: {fileID: 114242245703222766}
-  - component: {fileID: 114521790178670764}
+  - component: {fileID: 114773027976714458}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -70,7 +70,7 @@ MonoBehaviour:
     type: 2}
   m_cameras: []
   m_canvas: {fileID: 0}
---- !u!114 &114521790178670764
+--- !u!114 &114773027976714458
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -78,10 +78,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1207869564499050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8afef7740b7db4e8dc3da250f1ef6b, type: 3}
+  m_Script: {fileID: 11500000, guid: f1c9ba295bd9e8248afc6ca81b6c5cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_players: []
+  m_screenCanvas: {fileID: 0}
+  m_playerCanvasPrefab: {fileID: 0}
 --- !u!114 &114873261481066266
 MonoBehaviour:
   m_ObjectHideFlags: 1
