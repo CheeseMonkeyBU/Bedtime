@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33123974490869242}
   - component: {fileID: 23237994985360228}
   - component: {fileID: 54674895965203290}
-  - component: {fileID: 114509427303531046}
+  - component: {fileID: 114168306524748324}
   m_Layer: 0
   m_Name: stairs
   m_TagString: Untagged
@@ -3298,7 +3298,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.900001, y: 6.3, z: 6.746928}
   m_Center: {x: 2.4500005, y: 3.15, z: 3.373464}
---- !u!114 &114509427303531046
+--- !u!114 &114168306524748324
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3311,6 +3311,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_stairPrefab: {fileID: 1110365813607466, guid: 06306d9c6c84a874bbfcea0c699fdc11,
     type: 2}
-  m_levels: []
+  m_levels:
+  - {fileID: 1946772299029302, guid: af355bfdc9e1a464086c138beb7656ca, type: 2}
+  - {fileID: 1418931239824086, guid: 7870cf651f9749b4c9db8996c43b8ca3, type: 2}
   m_floorCamSize: 18
   m_stairCamSize: 8
+  m_myLevel: {fileID: 0}

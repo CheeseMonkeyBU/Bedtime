@@ -10,13 +10,14 @@ public class PlayerController : MonoBehaviour {
 	public Power m_heldPower;
 	public Power m_currentEffect;
 
-	private float m_powerLength = 5.0f;
-	private float m_elapsed;
-
 	public float m_acceleration, m_speed, m_rotSpeed;
 	public Camera m_camera;
+    public Canvas m_canvas;
 
-	private Rigidbody m_rb;
+    private float m_powerLength = 5.0f;
+    private float m_elapsed;
+
+    private Rigidbody m_rb;
 	private Animator m_anim;
 
 	void Start () {
@@ -102,5 +103,10 @@ public class PlayerController : MonoBehaviour {
 		StarPower,
 		SlowDown
 	}
+
+    public GameObject getCanvasGameObject()
+    {
+        return m_camera.GetComponent<CameraController>().canvas;
+    }
 
 }

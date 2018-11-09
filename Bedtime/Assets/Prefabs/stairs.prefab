@@ -186,7 +186,10 @@ MonoBehaviour:
   m_stairPrefab: {fileID: 1110365813607466, guid: 06306d9c6c84a874bbfcea0c699fdc11,
     type: 2}
   m_levels:
-  - {fileID: 1458015290375634, guid: 61340ae84b5be4a4eb0df1e7af661070, type: 2}
+  - {fileID: 1946772299029302, guid: af355bfdc9e1a464086c138beb7656ca, type: 2}
+  m_floorCamSize: 18
+  m_stairCamSize: 8
+  m_myLevel: {fileID: 0}
 --- !u!114 &114234894539634016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,3 +204,6 @@ MonoBehaviour:
   m_stairPrefab: {fileID: 1110365813607466, guid: 06306d9c6c84a874bbfcea0c699fdc11,
     type: 2}
   m_levels: []
+  m_floorCamSize: 18
+  m_stairCamSize: 8
+  m_myLevel: {fileID: 0}
