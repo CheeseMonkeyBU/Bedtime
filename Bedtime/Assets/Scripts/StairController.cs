@@ -31,6 +31,7 @@ public class StairController : MonoBehaviour {
         {
             if (!m_playerSet)
             {
+                m_playerSet = true;
                 PlayerController[] chars = FindObjectsOfType<PlayerController>();
                 if (chars.Length == 0)
                     Debug.LogError("No players!");
@@ -98,31 +99,35 @@ public class StairController : MonoBehaviour {
                             p = t.position;
 
                     ob.transform.position = ob.transform.position + (ob.transform.position - p);
+                    m_previous = ob;
+                    m_old = true;
                 }
+                else
+                {
+                    int level = Random.Range(0, m_levels.Length);
+                    while (level == m_lastLevel) { level = Random.Range(0, m_levels.Length); Debug.Log("Choosing Level"); }
+                    Debug.Log("New level! Using level " + level + " out of " + m_levels.Length + ", last level was " + m_lastLevel);
+                    m_lastLevel = level;
 
-                int level = Random.Range(0, m_levels.Length);
-                while (level == m_lastLevel) { level = Random.Range(0, m_levels.Length); Debug.Log("Choosing Level"); }
-                Debug.Log("New level! Using level " + level + " out of " + m_levels.Length + ", last level was " + m_lastLevel);
-                m_lastLevel = level;
+                    Vector3 pos = new Vector3();
+                    foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())
+                        if (t.CompareTag("EndOfStairs"))
+                            pos = t.position;
 
-                Vector3 pos = new Vector3();
-                foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())
-                    if (t.CompareTag("EndOfStairs"))
-                        pos = t.position;
+                    GameObject o = Instantiate(m_levels[level], pos, Quaternion.Euler(m_previous.transform.rotation.eulerAngles - new Vector3(0.0f, 90.0f, 0.0f)));
+                    foreach (Transform t in o.GetComponentsInChildren<Transform>())
+                        if (t.CompareTag("StartOfStairs"))
+                            pos = t.position;
 
-                GameObject o = Instantiate(m_levels[level], pos, Quaternion.Euler(m_previous.transform.rotation.eulerAngles - new Vector3(0.0f, 90.0f, 0.0f)));
-                foreach (Transform t in o.GetComponentsInChildren<Transform>())
-                    if (t.CompareTag("StartOfStairs"))
-                        pos = t.position;
+                    o.transform.position = o.transform.position + (o.transform.position - pos);
+                    o.GetComponentInChildren<StairController>().m_levels = m_levels;
+                    o.GetComponentInChildren<StairController>().m_myLevel = o;
+                    o.GetComponentInChildren<StairController>().m_lastLevel = m_lastLevel;
+                    o.GetComponentInChildren<StairController>().m_winLevel = m_winLevel;
 
-                o.transform.position = o.transform.position + (o.transform.position - pos);
-                o.GetComponentInChildren<StairController>().m_levels = m_levels;
-                o.GetComponentInChildren<StairController>().m_myLevel = o;
-                o.GetComponentInChildren<StairController>().m_lastLevel = m_lastLevel;
-                o.GetComponentInChildren<StairController>().m_winLevel = m_winLevel;
-
-                m_previous = o;
-                m_old = true;
+                    m_previous = o;
+                    m_old = true;
+                }
             }
         }
         else
