@@ -91,8 +91,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_cameraPrefab: {fileID: 1497795810559378, guid: d815c1a3a2c5544458b3da9a38b62d24,
     type: 2}
+  m_barPrefab: {fileID: 224581556946069758, guid: 4c26abc6bb0ee3040b51754089108caf,
+    type: 2}
   m_cameras: []
-  m_canvas: {fileID: 0}
+  m_canvas: {fileID: 223354614483424646}
 --- !u!114 &114696002115465234
 MonoBehaviour:
   m_ObjectHideFlags: 1
