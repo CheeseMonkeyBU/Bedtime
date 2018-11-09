@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour {
 
     public void usePowerup(int _playerID)
     {
+        m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
         m_gpController.applyPowerupToPlayer(_playerID, m_heldPower);
     }
 

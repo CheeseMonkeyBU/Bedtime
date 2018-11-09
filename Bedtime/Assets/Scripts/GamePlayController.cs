@@ -61,6 +61,10 @@ public class GamePlayController : MonoBehaviour {
         {
             StartCoroutine("usePowerupInvincible", m_players[_playerID]);
         }
+        else if (_type == Powerup.PowerupType.Obstacles)
+        {
+            StartCoroutine("usePowerupObstacle", m_players[_playerID]);
+        }
     }
 
     public IEnumerator usePowerupFreeze(PlayerController _targetPlayer)
@@ -74,7 +78,7 @@ public class GamePlayController : MonoBehaviour {
             _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
         }
 
-        _targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
+        //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
     public IEnumerator usePowerupSpeed(PlayerController _targetPlayer)
@@ -88,7 +92,7 @@ public class GamePlayController : MonoBehaviour {
             _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
         }
 
-        _targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
+        //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
     public IEnumerator usePowerupInvincible(PlayerController _targetPlayer)
@@ -102,7 +106,17 @@ public class GamePlayController : MonoBehaviour {
             _targetPlayer.m_isInvincible = false;
         }
 
-        _targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
+        //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
+    }
+
+    public IEnumerator usePowerupObstacle(PlayerController _targetPlayer)
+    {
+        if (!_targetPlayer.m_isInvincible)
+        {
+            yield return new WaitForSeconds(1);
+        }
+
+        //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
 

@@ -16,6 +16,8 @@ public class Powerup : MonoBehaviour
     GameObject m_modelSpeed;
     [SerializeField]
     GameObject m_modelInvincible;
+    [SerializeField]
+    GameObject m_modelObstacle;
 
     // Use this for initialization
     void Start ()
@@ -35,6 +37,12 @@ public class Powerup : MonoBehaviour
             m_modelInvincible.SetActive(false);
         }
         if (type == PowerupType.Invincible)
+        {
+            m_modelFreeze.SetActive(false);
+            m_modelSpeed.SetActive(false);
+            m_modelInvincible.SetActive(true);
+        }
+        if (type == PowerupType.Obstacles)
         {
             m_modelFreeze.SetActive(false);
             m_modelSpeed.SetActive(false);

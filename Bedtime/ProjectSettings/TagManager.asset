@@ -4,17 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - InternalWall
+  - WinUI
   - StartOfStairs
-  - EndOfStairs
-  - SpawnPoint
-  - SpawnObject
   - EndOfGame
   - PowerupSpawner
-<<<<<<< HEAD
-=======
-  - WinUI
->>>>>>> 7f2eb471eba15badb117863ff5aa3ef7199251de
+  - EndOfStairs
   layers:
   - Default
   - TransparentFX
