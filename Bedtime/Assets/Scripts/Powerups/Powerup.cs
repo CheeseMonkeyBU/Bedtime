@@ -22,6 +22,7 @@ public class Powerup : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        GetComponentInChildren<ParticleSystem>().Stop();
         Debug.Log("Starting Powerup");
         m_placeholder.SetActive(false);
         if (type == PowerupType.Freeze)
@@ -68,6 +69,19 @@ public class Powerup : MonoBehaviour
             Debug.Log("Collided with Player");
             other.GetComponent<PlayerController>().setCurrentHeldPowerup(type);
             Destroy(gameObject);
+        }
+        else if(other.tag == "Light")
+        {
+            Debug.Log("Light!!");
+            GetComponentInChildren<ParticleSystem>().Play();
+        }
+    }
+
+    void OnTriggerExit(Collider _other)
+    {
+        if (_other.tag == "Light")
+        {
+            GetComponentInChildren<ParticleSystem>().Stop();
         }
     }
 

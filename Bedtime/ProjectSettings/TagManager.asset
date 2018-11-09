@@ -9,6 +9,10 @@ TagManager:
   - EndOfGame
   - PowerupSpawner
   - EndOfStairs
+  - SpawnObject
+  - SpawnPoint
+  - InternalWall
+  - Light
   layers:
   - Default
   - TransparentFX

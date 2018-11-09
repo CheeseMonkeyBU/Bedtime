@@ -480,11 +480,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4661860766320592}
   - component: {fileID: 33567669396161954}
-  - component: {fileID: 65836650258826896}
   - component: {fileID: 23367259167471250}
+  - component: {fileID: 136344861281412450}
   m_Layer: 0
   m_Name: Phone
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,7 +614,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1128180689031338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.25, y: 1, z: 8.5}
+  m_LocalPosition: {x: 187.34373, y: 298.0351, z: 266.21753}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4476321709296370}
@@ -1153,18 +1153,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &65836650258826896
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1872181535344682}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95337328530662488
 Animator:
   serializedVersion: 3
@@ -1238,7 +1226,22 @@ MonoBehaviour:
   defaultSpeed: 0
   m_camera: {fileID: 0}
   m_canvas: {fileID: 0}
+  m_battery: 0
+  m_maxBattery: 100
   m_isInvincible: 0
+--- !u!136 &136344861281412450
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1872181535344682}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 15
+  m_Height: 500
+  m_Direction: 0
+  m_Center: {x: -250, y: 0, z: 0}
 --- !u!136 &136718266205345120
 CapsuleCollider:
   m_ObjectHideFlags: 1
