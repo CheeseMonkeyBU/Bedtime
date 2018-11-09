@@ -1373,8 +1373,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1484162936404594}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 5.5, y: 7.5, z: 21}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 4, y: 7.5, z: 21}
+  m_LocalScale: {x: 2.7210984, y: 3, z: 2.7505903}
   m_Children: []
   m_Father: {fileID: 4093135595067662}
   m_RootOrder: 23
@@ -3312,6 +3312,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_stairPrefab: {fileID: 1110365813607466, guid: 06306d9c6c84a874bbfcea0c699fdc11,
     type: 2}
+  m_levels: []
+  m_floorCamSize: 18
+  m_stairCamSize: 8
 --- !u!114 &114509427303531046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3325,3 +3328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_stairPrefab: {fileID: 1110365813607466, guid: 06306d9c6c84a874bbfcea0c699fdc11,
     type: 2}
+  m_levels: []
+  m_floorCamSize: 18
+  m_stairCamSize: 8
