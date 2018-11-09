@@ -6,7 +6,7 @@ public class Powerup : MonoBehaviour
 {
 
     public PowerupType type;
-    public int maxPowerupIndex = 2;
+    public int maxPowerupIndex = 3;
 
     [SerializeField]
     GameObject m_placeholder;
@@ -16,9 +16,8 @@ public class Powerup : MonoBehaviour
     GameObject m_modelSpeed;
     [SerializeField]
     GameObject m_modelInvincible;
-
-    // freeze
-    float m_freezeTime = 3.0f;
+    [SerializeField]
+    GameObject m_modelObstacle;
 
     // Use this for initialization
     void Start ()
@@ -30,18 +29,28 @@ public class Powerup : MonoBehaviour
             m_modelFreeze.SetActive(true);
             m_modelSpeed.SetActive(false);
             m_modelInvincible.SetActive(false);
+            m_modelObstacle.SetActive(false);
         }
         if (type == PowerupType.Speed)
         {
             m_modelFreeze.SetActive(false);
             m_modelSpeed.SetActive(true);
             m_modelInvincible.SetActive(false);
+            m_modelObstacle.SetActive(false);
         }
         if (type == PowerupType.Invincible)
         {
             m_modelFreeze.SetActive(false);
             m_modelSpeed.SetActive(false);
             m_modelInvincible.SetActive(true);
+            m_modelObstacle.SetActive(false);
+        }
+        if (type == PowerupType.Obstacles)
+        {
+            m_modelFreeze.SetActive(false);
+            m_modelSpeed.SetActive(false);
+            m_modelInvincible.SetActive(false);
+            m_modelObstacle.SetActive(true);
         }
     }
 	
@@ -52,6 +61,7 @@ public class Powerup : MonoBehaviour
 	}
     void OnTriggerEnter(Collider _collision)
     {
+
         GameObject other = _collision.gameObject;
         if (other.tag == "Player")
         {
@@ -61,13 +71,13 @@ public class Powerup : MonoBehaviour
         }
     }
 
-
     public enum PowerupType
     {
         None = -1,
         Freeze = 0,
         Speed = 1,
-        Invincible = 2
+        Invincible = 2,
+        Obstacles = 3
     }
 
 

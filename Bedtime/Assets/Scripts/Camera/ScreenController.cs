@@ -97,9 +97,12 @@ public class ScreenController : MonoBehaviour
     {
         if(m_cameras.Count > 1)
         {
+            int index = m_cameras.IndexOf(_camera);
             gameObject.GetComponent<UIController>().removeCanvasByCamera(_camera);
             Destroy(_camera);
             m_cameras.Remove(_camera);
+            Destroy(m_bars[index].gameObject);
+            m_bars.RemoveAt(index);
             StopCoroutine("removeLerpViewportReset");
             StartCoroutine("removeLerpViewportReset", _camera);
         }
@@ -152,7 +155,6 @@ public class ScreenController : MonoBehaviour
         for(int i = 0; i < m_cameras.Count; ++i)
         {
             cameraStartViewportX.Add(m_cameras[i].GetComponent<Camera>().rect.x);
-            Debug.Log(cameraStartViewportX[i]);
         }
 
         while (elapsedTime < m_transitionSpeed)
