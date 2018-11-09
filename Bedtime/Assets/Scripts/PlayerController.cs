@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour {
         }
 
 
->>>>>>> 078de1c437762defad9c1a5c42d0eca45b1d1127
 		//Player Movement code
 
 		m_rb.ResetInertiaTensor();
