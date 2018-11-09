@@ -27,6 +27,7 @@ public class DarknessController : MonoBehaviour
         {
             Debug.Log("Killed Player " + other.GetComponent<PlayerController>().m_playerNumber);
             other.GetComponent<PlayerController>().kill();
+            Destroy(gameObject);
         }
     }
 }
