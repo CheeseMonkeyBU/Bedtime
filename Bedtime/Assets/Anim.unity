@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!223 &844639297 stripped
+Canvas:
+  m_PrefabParentObject: {fileID: 223354614483424646, guid: 1c03694cf0154244daf4ebb35145ade8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1088007491}
 --- !u!1001 &1088007491
 Prefab:
   m_ObjectHideFlags: 0
@@ -157,6 +162,17 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114312902571663710, guid: 1c03694cf0154244daf4ebb35145ade8,
+        type: 2}
+      propertyPath: m_barPrefab
+      value: 
+      objectReference: {fileID: 224581556946069758, guid: 4c26abc6bb0ee3040b51754089108caf,
+        type: 2}
+    - target: {fileID: 114312902571663710, guid: 1c03694cf0154244daf4ebb35145ade8,
+        type: 2}
+      propertyPath: m_canvas
+      value: 
+      objectReference: {fileID: 844639297}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c03694cf0154244daf4ebb35145ade8, type: 2}
   m_IsPrefabParent: 0
