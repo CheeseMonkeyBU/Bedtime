@@ -8,6 +8,8 @@ public class ScreenController : MonoBehaviour
 
     [SerializeField]
     GameObject m_cameraPrefab;
+    [SerializeField]
+    RectTransform m_barPrefab;
 
     [SerializeField]
     List<GameObject> m_cameras;
@@ -22,11 +24,14 @@ public class ScreenController : MonoBehaviour
 
     float m_viewportX;
 
+    List<RectTransform> m_bars;
+
     // Use this for initialization
     void Awake ()
     {
         Debug.Log("Assigning Camera List");
         m_cameras = new List<GameObject>();
+        m_bars = new List<RectTransform>();
 	}
 	
 	// Update is called once per frame
@@ -47,6 +52,14 @@ public class ScreenController : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             m_cameras[0].GetComponent<CameraController>().addTrauma(0.2f);
+        }
+
+        for(int i = 0; i < m_cameras.Count; i++)
+        {
+            Rect r = m_cameras[i].GetComponent<Camera>().rect;
+            float canvasWidth = m_canvas.pixelRect.width, canvasHeight = m_canvas.pixelRect.height, barWidth = m_border * canvasWidth;
+            m_bars[i].position = new Vector3(r.x * canvasWidth + r.width * canvasWidth + barWidth / 2, canvasHeight / 2, 0.0f);
+            m_bars[i].sizeDelta = new Vector2(barWidth, canvasHeight);
         }
     }
 
@@ -72,6 +85,8 @@ public class ScreenController : MonoBehaviour
         m_cameras.Add(Instantiate(m_cameraPrefab));
         int newestCamera = m_cameras.Count - 1;
         m_cameras[newestCamera].name = "Player_" + newestCamera + "_Camera";
+
+        m_bars.Add(Instantiate(m_barPrefab, m_canvas.transform));
 
         StartCoroutine("addLerpViewportReset");
 
