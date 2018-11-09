@@ -14,7 +14,7 @@ public class StairController : MonoBehaviour {
     public int m_lastLevel = -1;
 
     private List<GameObject> m_stairs;
-    private GameObject m_previous;
+    public GameObject m_previous;
     private PlayerController m_player;
     private bool m_old = false, m_playerSet = false;
 
@@ -50,6 +50,8 @@ public class StairController : MonoBehaviour {
                         distance = d;
                     }
                 }
+
+                m_player.m_recentStairController = this;
             }
             else
                 return;

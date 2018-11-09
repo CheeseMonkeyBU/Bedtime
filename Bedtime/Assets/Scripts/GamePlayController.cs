@@ -18,6 +18,8 @@ public class GamePlayController : MonoBehaviour {
     // invincible settings
     public float m_invincibleTime = 5.0f;
 
+    public GameObject m_obstacle;
+
     // Use this for initialization
     void Start () {
 		//for (int i = 0; i < m_players.Count; i++) {
@@ -116,7 +118,14 @@ public class GamePlayController : MonoBehaviour {
         if (!_targetPlayer.m_isInvincible)
         {
             yield return new WaitForSeconds(1);
+
+            if (_targetPlayer.m_recentStairController != null)
+            {
+                GameObject o = Instantiate(m_obstacle);
+                o.transform.position = _targetPlayer.m_recentStairController.GetComponent("EndOfStairs").transform.position;
+            }
         }
+
 
         //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }

@@ -32,13 +32,15 @@ public class PlayerController : MonoBehaviour {
 
     public bool m_isInvincible = false;
 
+    public StairController m_recentStairController;
+
 	void Start () {
 		m_rb = GetComponent<Rigidbody>();
 		m_anim = GetComponent<Animator>();
 
         defaultSpeed = m_speed;
 
-        m_heldPower = Powerup.PowerupType.None;
+        m_heldPower = Powerup.PowerupType.Obstacles;
         m_battery = 15;
 	}
 
