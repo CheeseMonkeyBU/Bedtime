@@ -55,6 +55,8 @@ public class StairController : MonoBehaviour {
                 return;
         }
 
+        bool won = FindObjectOfType<ScreenController>().getCameraCount() == 1;
+
         //Based on y difference, spawn stairs or spawn a new level
         float stairHeight = m_previous.transform.position.y, playerHeight = m_player.transform.position.y;
         if(m_old)
@@ -86,7 +88,7 @@ public class StairController : MonoBehaviour {
                 }
 
                 //Check win condition
-                if (FindObjectOfType<ScreenController>().getCameraCount() == 1)
+                if (won)
                 {
                     Vector3 p = new Vector3();
                     foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())

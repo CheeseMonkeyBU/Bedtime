@@ -10,6 +10,8 @@ TagManager:
   - SpawnPoint
   - SpawnObject
   - EndOfGame
+  - PowerupSpawner
+  - WinUI
   layers:
   - Default
   - TransparentFX
