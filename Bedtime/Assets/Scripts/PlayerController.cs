@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody m_rb;
 	private Animator m_anim;
 
+    public bool m_hasStatusEffect = false;
     public bool m_isInvincible = false;
 
 	void Start () {

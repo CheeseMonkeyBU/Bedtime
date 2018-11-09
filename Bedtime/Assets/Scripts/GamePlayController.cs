@@ -17,27 +17,15 @@ public class GamePlayController : MonoBehaviour {
     public float m_invincibleTime = 5.0f;
 
     // Use this for initialization
-    void Start () {
-		//for (int i = 0; i < m_players.Count; i++) {
-		//	if (m_players [i] != null) {
-		//		m_players [i].m_playerNumber = i + 1;
-		//		m_players [i].m_gpController = this;
-		//	}
-		//}
+    void Start ()
+    {
+
 	}
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetButtonDown("PlayerA1"))
-        //    foreach (PlayerController p in m_players)
-        //        if (p.m_playerNumber == 0)
-        //            p.kill();
 
-        //if (Input.GetButtonDown("PlayerB1"))
-        //    foreach (PlayerController p in m_players)
-        //        if (p.m_playerNumber == 1)
-        //            p.kill();
     }
 
     public void registerPlayer(PlayerController _player)
@@ -69,27 +57,63 @@ public class GamePlayController : MonoBehaviour {
 
     public IEnumerator usePowerupFreeze(PlayerController _targetPlayer)
     {
-        if(!_targetPlayer.m_isInvincible)
+        if(!_targetPlayer.m_isInvincible || !_targetPlayer.m_hasStatusEffect)
         {
+            _targetPlayer.m_hasStatusEffect = true;
+            CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
+            canvas.changeStatusEffectIcon(Powerup.PowerupType.Freeze);
+
             _targetPlayer.m_speed = 0.0f;
 
-            yield return new WaitForSeconds(m_freezeTime);
+            float elapsedTime = 0.0f; 
+            while(elapsedTime < m_freezeTime)
+            {
+                canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_freezeTime));
+                Debug.Log(elapsedTime);
+                Debug.Log(m_freezeTime);
+                Debug.Log(elapsedTime / m_freezeTime);
+
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
 
             _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
+
+            _targetPlayer.m_hasStatusEffect = false;
+            canvas.setStatusEffectRingPerc(1.0f);
+            _targetPlayer.m_canvas.GetComponent<CanvasController>().clearStatusEffectIcon();
         }
 
-        //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
     public IEnumerator usePowerupSpeed(PlayerController _targetPlayer)
     {
-        if (!_targetPlayer.m_isInvincible)
+        if (!_targetPlayer.m_isInvincible || !_targetPlayer.m_hasStatusEffect)
         {
+            _targetPlayer.m_hasStatusEffect = true;
+            CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
+            canvas.changeStatusEffectIcon(Powerup.PowerupType.Speed);
+
             _targetPlayer.m_speed *= m_speedMultiplyer;
 
-            yield return new WaitForSeconds(m_speedTime);
+            float elapsedTime = 0.0f;
+            while (elapsedTime < m_speedTime)
+            {
+                canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_speedTime));
+
+                Debug.Log(elapsedTime);
+                Debug.Log(m_speedTime);
+                Debug.Log(elapsedTime / m_speedTime);
+
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
 
             _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
+
+            _targetPlayer.m_hasStatusEffect = false;
+            canvas.setStatusEffectRingPerc(1.0f);
+            _targetPlayer.m_canvas.GetComponent<CanvasController>().clearStatusEffectIcon();
         }
 
         //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
@@ -97,13 +121,32 @@ public class GamePlayController : MonoBehaviour {
 
     public IEnumerator usePowerupInvincible(PlayerController _targetPlayer)
     {
-        if (!_targetPlayer.m_isInvincible)
+        if (!_targetPlayer.m_isInvincible || !_targetPlayer.m_hasStatusEffect)
         {
+            _targetPlayer.m_hasStatusEffect = true;
+            CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
+            canvas.changeStatusEffectIcon(Powerup.PowerupType.Invincible);
+
             _targetPlayer.m_isInvincible = true;
 
-            yield return new WaitForSeconds(m_invincibleTime);
+            float elapsedTime = 0.0f;
+            while (elapsedTime < m_invincibleTime)
+            {
+                canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_invincibleTime));
+
+                Debug.Log(elapsedTime);
+                Debug.Log(m_invincibleTime);
+                Debug.Log(elapsedTime / m_invincibleTime);
+
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
 
             _targetPlayer.m_isInvincible = false;
+
+            _targetPlayer.m_hasStatusEffect = false;
+            canvas.setStatusEffectRingPerc(1.0f);
+            _targetPlayer.m_canvas.GetComponent<CanvasController>().clearStatusEffectIcon();
         }
 
         //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
