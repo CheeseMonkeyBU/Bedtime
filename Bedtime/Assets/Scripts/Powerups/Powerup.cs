@@ -6,7 +6,7 @@ public class Powerup : MonoBehaviour
 {
 
     public PowerupType type;
-    public int maxPowerupIndex = 2;
+    public int maxPowerupIndex = 3;
 
     [SerializeField]
     GameObject m_placeholder;
@@ -16,9 +16,6 @@ public class Powerup : MonoBehaviour
     GameObject m_modelSpeed;
     [SerializeField]
     GameObject m_modelInvincible;
-
-    // freeze
-    float m_freezeTime = 3.0f;
 
     // Use this for initialization
     void Start ()
@@ -52,6 +49,7 @@ public class Powerup : MonoBehaviour
 	}
     void OnTriggerEnter(Collider _collision)
     {
+
         GameObject other = _collision.gameObject;
         if (other.tag == "Player")
         {
@@ -61,13 +59,13 @@ public class Powerup : MonoBehaviour
         }
     }
 
-
     public enum PowerupType
     {
         None = -1,
         Freeze = 0,
         Speed = 1,
-        Invincible = 2
+        Invincible = 2,
+        Obstacles = 3
     }
 
 

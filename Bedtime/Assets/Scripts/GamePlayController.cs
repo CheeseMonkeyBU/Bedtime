@@ -73,6 +73,8 @@ public class GamePlayController : MonoBehaviour {
 
             _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
         }
+
+        _targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
     public IEnumerator usePowerupSpeed(PlayerController _targetPlayer)
@@ -85,6 +87,8 @@ public class GamePlayController : MonoBehaviour {
 
             _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
         }
+
+        _targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
     public IEnumerator usePowerupInvincible(PlayerController _targetPlayer)
@@ -97,6 +101,8 @@ public class GamePlayController : MonoBehaviour {
 
             _targetPlayer.m_isInvincible = false;
         }
+
+        _targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
 

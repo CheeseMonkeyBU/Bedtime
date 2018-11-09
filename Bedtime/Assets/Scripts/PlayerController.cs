@@ -20,11 +20,12 @@ public class PlayerController : MonoBehaviour {
     public Camera m_camera;
     public Canvas m_canvas;
 
-    private float m_powerLength = 5.0f;
+    //public float m_powerLength = 5.0f;
     private float m_elapsed;
 
     private bool m_light = false;
-    private float m_battery = 15;
+    public float m_battery;
+    public float m_maxBattery = 100;
 
     private Rigidbody m_rb;
 	private Animator m_anim;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour {
         defaultSpeed = m_speed;
 
         m_heldPower = Powerup.PowerupType.None;
+        m_battery = 15;
 	}
 
     void Update()
@@ -96,7 +98,7 @@ public class PlayerController : MonoBehaviour {
 
         if (m_light)
         {
-            m_battery -= Time.deltaTime;
+            m_battery -= (Time.deltaTime / 2);
             if(m_battery <= 0)
             {
                 m_light = false;
@@ -138,10 +140,12 @@ public class PlayerController : MonoBehaviour {
     public void setCurrentHeldPowerup(Powerup.PowerupType _type)
     {
         m_heldPower = _type;
+        m_canvas.GetComponent<CanvasController>().changePowerupIcon(_type);
     }
 
     public void usePowerup(int _playerID)
     {
+        m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
         m_gpController.applyPowerupToPlayer(_playerID, m_heldPower);
     }
 

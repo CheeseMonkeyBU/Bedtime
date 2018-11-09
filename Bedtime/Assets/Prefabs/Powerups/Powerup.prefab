@@ -611,6 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  maxPowerupIndex: 2
   m_placeholder: {fileID: 1085801277124716}
   m_modelFreeze: {fileID: 1519854267315648}
   m_modelSpeed: {fileID: 1009358615264006}
