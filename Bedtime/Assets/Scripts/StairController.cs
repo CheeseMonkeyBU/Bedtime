@@ -5,22 +5,26 @@ using UnityEngine;
 public class StairController : MonoBehaviour {
 
     public GameObject m_stairPrefab;
-    public List<GameObject> m_levels;
+    public GameObject[] m_levels;
 
     public float m_floorCamSize = 18, m_stairCamSize = 8;
 
+    public GameObject m_myLevel;
+
+    private List<GameObject> m_stairs;
     private GameObject m_previous;
     private PlayerController m_player;
-
+    private bool m_old = false;
 
 	void Start ()
     {
+        m_stairs = new List<GameObject>();
         spawnStair();
 	}
 	
 	void Update ()
     {
-        
+        //Find closest player if m_player isn't set
         if(!m_player)
         {
             PlayerController[] chars = FindObjectsOfType<PlayerController>();
@@ -43,15 +47,38 @@ public class StairController : MonoBehaviour {
             }
         }
 
+        //Based on y difference, spawn stairs or spawn a new level
         float stairHeight = m_previous.transform.position.y, playerHeight = m_player.transform.position.y;
-        if(playerHeight > transform.position.y + 5)
+        if(m_old)
+        {
+            if (playerHeight < stairHeight)
+                return;
+
+            foreach (GameObject stair in m_stairs)
+                Destroy(stair);
+
+            if (m_myLevel)
+                Destroy(m_myLevel);
+            else
+                Destroy(this);
+            return;
+        }
+        if (playerHeight > transform.position.y + 5)
         {
             m_player.m_camera.GetComponent<CameraController>().setOrthoSize(m_stairCamSize, 0.2f);
             if (stairHeight - playerHeight < m_player.m_camera.orthographicSize / 2)
                 spawnStair();
-            if(playerHeight > transform.position.y + 70)
+            if (playerHeight > transform.position.y + 70)
             {
-                int level = Random.Range(0, m_levels.Count - 1);
+                if (m_levels.Length == 0)
+                {
+                    Debug.LogError("No levels associated with this staircase!");
+                    Destroy(this);
+                    return;
+                }
+
+                Debug.Log("New level!");
+                int level = Random.Range(0, m_levels.Length - 1);
                 Vector3 pos = new Vector3();
                 foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())
                     if (t.CompareTag("EndOfStairs"))
@@ -64,13 +91,14 @@ public class StairController : MonoBehaviour {
 
                 o.transform.position = o.transform.position + (o.transform.position - pos);
                 o.GetComponentInChildren<StairController>().m_levels = m_levels;
-                Destroy(gameObject);
+                o.GetComponentInChildren<StairController>().m_myLevel = o;
+
+                m_previous = o;
+                m_old = true;
             }
         }
         else
-        {
             m_player.m_camera.GetComponent<CameraController>().setOrthoSize(m_floorCamSize, 0.2f);
-        }
         
 	}
 
@@ -92,5 +120,6 @@ public class StairController : MonoBehaviour {
                     spawnPos = t.position;
             m_previous = Instantiate(m_stairPrefab, spawnPos, m_previous.transform.rotation);
         }
+        m_stairs.Add(m_previous);
     }
 }
