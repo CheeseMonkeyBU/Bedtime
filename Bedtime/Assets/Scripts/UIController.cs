@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour {
     GameObject m_playerCanvasPrefab;
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
         m_playerCanvas = new List<GameObject>();
 	}

@@ -15,6 +15,7 @@ public class StairController : MonoBehaviour {
     private GameObject m_previous;
     private PlayerController m_player;
     private bool m_old = false;
+    private int m_lastLevel = -1;
 
 	void Start ()
     {
@@ -77,8 +78,11 @@ public class StairController : MonoBehaviour {
                     return;
                 }
 
-                Debug.Log("New level!");
-                int level = Random.Range(0, m_levels.Length - 1);
+                int level = Random.Range(0, m_levels.Length);
+                while (level == m_lastLevel) { level = Random.Range(0, m_levels.Length);  }
+                m_lastLevel = level;
+
+                Debug.Log("New level! Using level " + level + " out of " + m_levels.Length);
                 Vector3 pos = new Vector3();
                 foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())
                     if (t.CompareTag("EndOfStairs"))
