@@ -6,6 +6,7 @@ public class Powerup : MonoBehaviour
 {
 
     public PowerupType type;
+    public int maxPowerupIndex = 2;
 
     [SerializeField]
     GameObject m_placeholder;
@@ -49,15 +50,6 @@ public class Powerup : MonoBehaviour
     {
         transform.Rotate(new Vector3(0, 100, 0) * Time.deltaTime);
 	}
-
-    public enum PowerupType
-    {
-        None,
-        Freeze,
-        Speed,
-        Invincible
-    }
-
     void OnTriggerEnter(Collider _collision)
     {
         GameObject other = _collision.gameObject;
@@ -68,4 +60,15 @@ public class Powerup : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
+    public enum PowerupType
+    {
+        None = -1,
+        Freeze = 0,
+        Speed = 1,
+        Invincible = 2
+    }
+
+
 }

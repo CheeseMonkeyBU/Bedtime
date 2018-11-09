@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour {
 		m_anim = GetComponent<Animator>();
 
         defaultSpeed = m_speed;
+
+        m_heldPower = Powerup.PowerupType.None;
 	}
 
     void Update()
