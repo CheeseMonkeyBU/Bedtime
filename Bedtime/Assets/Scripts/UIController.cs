@@ -39,21 +39,13 @@ public class UIController : MonoBehaviour {
         Canvas currentCanvasComponent = currentCanvasGO.GetComponent<Canvas>();
         RectTransform newCanvasRect = currentCanvasComponent.GetComponent<RectTransform>();
         RectTransform mainCanvasRect = m_screenCanvas.GetComponent<RectTransform>();
-        // set size (from parent canvas)
-        Debug.Log("Main Canvas Size: " + mainCanvasRect.sizeDelta.x);
-        Debug.Log("Camera Rect Wdith: " + _camera.rect.width);
-        Debug.Log(" * " + mainCanvasRect.sizeDelta.x * _camera.rect.width);
 
+        // error check for infinity causing a NaN
         float cameraRectWidth = _camera.rect.width;
-
         if (cameraRectWidth == Mathf.Infinity)
         {
             cameraRectWidth = 1;
         }
-        Debug.Log("Fixed:");
-        Debug.Log("Main Canvas Size: " + mainCanvasRect.sizeDelta.x);
-        Debug.Log("Camera Rect Wdith: " + cameraRectWidth);
-        Debug.Log(" * " + mainCanvasRect.sizeDelta.x * _camera.rect.width);
 
         newCanvasRect.sizeDelta = new Vector2(mainCanvasRect.sizeDelta.x * cameraRectWidth, mainCanvasRect.sizeDelta.y);
         // set pivot (from parent canvas)
