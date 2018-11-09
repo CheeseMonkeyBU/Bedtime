@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GamePlayController : MonoBehaviour {
@@ -34,7 +35,8 @@ public class GamePlayController : MonoBehaviour {
             panel.GetComponentInChildren<Image>().enabled = true;
             panel.GetComponentInChildren<Image>().color = new Color(0, 0, 0, 1);
             panel.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
-            panel.GetComponentInChildren<TextMeshProUGUI>().text = "Darkness envelopes you";
+            panel.GetComponentInChildren<TextMeshProUGUI>().text = "Darkness envelops you";
+            StartCoroutine(waitForMenu());
         }
 
     }
@@ -80,6 +82,12 @@ public class GamePlayController : MonoBehaviour {
         }
 
         return true;
+    }
+
+    private IEnumerator waitForMenu()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(0);
     }
 
     public IEnumerator usePowerupFreeze(PlayerController _targetPlayer)
