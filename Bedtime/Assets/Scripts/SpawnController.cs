@@ -12,6 +12,9 @@ public class SpawnController : MonoBehaviour
     List<GameObject> m_spawnPoints;
 
     [SerializeField]
+    GameObject m_killplane;
+
+    [SerializeField]
     public int playerCount = 2;
 
     void Start()
@@ -63,7 +66,12 @@ public class SpawnController : MonoBehaviour
     {
         int spawnPointIndex = Random.Range(0, m_spawnPoints.Count - 1);
 
+
+
         GameObject player = Instantiate(m_playerGameObject);
+
+        GameObject plane = Instantiate(m_killplane);
+        plane.GetComponent<DarknessController>().player = player;
 
         player.transform.position = m_spawnPoints[spawnPointIndex].transform.position;
         m_spawnPoints.RemoveAt(spawnPointIndex);
