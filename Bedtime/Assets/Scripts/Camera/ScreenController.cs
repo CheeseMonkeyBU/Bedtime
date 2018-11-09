@@ -105,6 +105,11 @@ public class ScreenController : MonoBehaviour
         }
     }
 
+    public int getCameraCount()
+    {
+        return m_cameras.Count;
+    }
+
     IEnumerator addLerpViewportReset()
     {
         m_isSizeTransitioning = true;

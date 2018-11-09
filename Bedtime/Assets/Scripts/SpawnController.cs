@@ -19,7 +19,7 @@ public class SpawnController : MonoBehaviour
         playerCount = NumberOfPlayers.numberOfPlayers;
 
         for(int i = 0; i < playerCount; i++)
-            Instantiate(m_startLevel, new Vector3(i * 100, 0, 0), Quaternion.identity);
+            Instantiate(m_startLevel, new Vector3(i * 200, 0, 0), Quaternion.identity);
 
         m_spawnPoints = new List<GameObject>();
         // look through all objects and find any that are spawn points and add them to the list of spawn points

@@ -148,4 +148,10 @@ public class PlayerController : MonoBehaviour {
     {
         return m_camera.GetComponent<CameraController>().canvas;
     }
+
+    public void kill()
+    {
+        FindObjectOfType<ScreenController>().removeViewport(m_camera.gameObject);
+        Destroy(gameObject);
+    }
 }
