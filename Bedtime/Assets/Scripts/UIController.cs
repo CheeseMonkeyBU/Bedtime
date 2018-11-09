@@ -6,13 +6,14 @@ public class UIController : MonoBehaviour {
 
     [SerializeField]
     Canvas m_screenCanvas;
+
     List<GameObject> m_playerCanvas;
 
     [SerializeField]
     GameObject m_playerCanvasPrefab;
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
         m_playerCanvas = new List<GameObject>();
 	}
