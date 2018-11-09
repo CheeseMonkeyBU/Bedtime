@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour {
             m_light = !m_light;
             GetComponent<Animator>().SetBool("Light", m_light);
             GetComponentInChildren<Light>().enabled = m_light;
+            GetComponentInChildren<Light>().transform.parent.GetComponentInChildren<Collider>().enabled = m_light;
         }
 
         if (m_light)
