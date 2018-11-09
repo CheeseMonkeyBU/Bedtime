@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class WinController : MonoBehaviour {
@@ -17,5 +18,12 @@ public class WinController : MonoBehaviour {
             dc.GetComponentInChildren<ParticleSystem>().Stop();
             Destroy(dc);
         }
+        StartCoroutine(waitForMenu());
+    }
+
+    private IEnumerator waitForMenu()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(0);
     }
 }
