@@ -8,6 +8,7 @@ public class SpawnController : MonoBehaviour
     GameObject m_playerGameObject;
     [SerializeField]
     GameObject m_startLevel;
+    [SerializeField]
     List<GameObject> m_spawnPoints;
 
     [SerializeField]
