@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour {
     private float m_powerLength = 5.0f;
     private float m_elapsed;
 
+    private bool m_light = false;
+    private float m_battery = 15;
+
     private Rigidbody m_rb;
 	private Animator m_anim;
 
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour {
                 // if B button pressed
                 Debug.Log("Player " + m_playerNumber + " targeting player 0 with current powerup");
 
-
+                usePowerup(1);
 
                 m_heldPower = Powerup.PowerupType.None;
             }
@@ -63,7 +66,7 @@ public class PlayerController : MonoBehaviour {
                 // if X button pressed
                 Debug.Log("Player " + m_playerNumber + " targeting player 0 with current powerup");
 
-
+                usePowerup(2);
 
                 m_heldPower = Powerup.PowerupType.None;
             }
@@ -72,7 +75,7 @@ public class PlayerController : MonoBehaviour {
                 // if Y button pressed
                 Debug.Log("Player " + m_playerNumber + " targeting player 0 with current powerup");
 
-
+                usePowerup(3);
 
                 m_heldPower = Powerup.PowerupType.None;
             }
@@ -82,6 +85,26 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     { 
+        if (Input.GetButtonDown("Light" + (m_playerNumber + 1).ToString()) && m_battery > 0)
+        {
+            m_light = !m_light;
+            GetComponent<Animator>().SetBool("Light", m_light);
+            GetComponentInChildren<Light>().enabled = m_light;
+        }
+
+        if (m_light)
+        {
+            m_battery -= Time.deltaTime;
+            if(m_battery <= 0)
+            {
+                m_light = false;
+                GetComponent<Animator>().SetBool("Light", m_light);
+                GetComponentInChildren<Light>().enabled = m_light;
+            }
+        }
+
+
+>>>>>>> 078de1c437762defad9c1a5c42d0eca45b1d1127
 		//Player Movement code
 
 		m_rb.ResetInertiaTensor();
