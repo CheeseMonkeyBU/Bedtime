@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
 
@@ -87,5 +88,10 @@ public class UIController : MonoBehaviour {
             // set position (from camera)
             newCanvasRect.position = new Vector3(mainCanvasRect.sizeDelta.x * camera.rect.x, 0, 0);
         }
+    }
+
+    public RectTransform getWinPanel()
+    {
+        return GetComponentInChildren<Image>().rectTransform;
     }
 }
