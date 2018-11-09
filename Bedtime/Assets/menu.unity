@@ -577,6 +577,7 @@ MonoBehaviour:
   twoPlayersButton: {fileID: 1289858200}
   threePlayersButton: {fileID: 712119173}
   fourPlayersButton: {fileID: 1460300380}
+  sceneName: Anim
 --- !u!1 &285435405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2061,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 486de507c425179418c4d742d3bde47a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5dc55f0b53f0f674cad495004ceae94f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
