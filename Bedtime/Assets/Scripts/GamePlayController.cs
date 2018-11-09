@@ -29,7 +29,15 @@ public class GamePlayController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //if (Input.GetButtonDown("PlayerA1"))
+        //    foreach (PlayerController p in m_players)
+        //        if (p.m_playerNumber == 0)
+        //            p.kill();
 
+        //if (Input.GetButtonDown("PlayerB1"))
+        //    foreach (PlayerController p in m_players)
+        //        if (p.m_playerNumber == 1)
+        //            p.kill();
     }
 
     public void registerPlayer(PlayerController _player)

@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour {
 		m_anim = GetComponent<Animator>();
 
         defaultSpeed = m_speed;
+
+        m_heldPower = Powerup.PowerupType.None;
 	}
 
     void Update()
@@ -147,5 +149,11 @@ public class PlayerController : MonoBehaviour {
     public GameObject getCanvasGameObject()
     {
         return m_camera.GetComponent<CameraController>().canvas;
+    }
+
+    public void kill()
+    {
+        FindObjectOfType<ScreenController>().removeViewport(m_camera.gameObject);
+        Destroy(gameObject);
     }
 }

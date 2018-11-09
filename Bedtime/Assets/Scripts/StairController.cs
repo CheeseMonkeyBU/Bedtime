@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StairController : MonoBehaviour {
 
+    public GameObject m_winLevel;
     public GameObject m_stairPrefab;
     public GameObject[] m_levels;
 
@@ -15,7 +16,7 @@ public class StairController : MonoBehaviour {
     private List<GameObject> m_stairs;
     private GameObject m_previous;
     private PlayerController m_player;
-    private bool m_old = false;
+    private bool m_old = false, m_playerSet = false;
 
 	void Start ()
     {
@@ -28,24 +29,30 @@ public class StairController : MonoBehaviour {
         //Find closest player if m_player isn't set
         if(!m_player)
         {
-            PlayerController[] chars = FindObjectsOfType<PlayerController>();
-            if(chars.Length == 0)
-                Debug.LogError("No players!");
-            float distance = 0;
-            foreach (PlayerController c in chars)
+            if (!m_playerSet)
             {
-                float d = 0;
-                if (!m_player)
+                m_playerSet = true;
+                PlayerController[] chars = FindObjectsOfType<PlayerController>();
+                if (chars.Length == 0)
+                    Debug.LogError("No players!");
+                float distance = 0;
+                foreach (PlayerController c in chars)
                 {
-                    m_player = c;
-                    distance = Vector3.Distance(c.transform.position, transform.position);
-                }
-                else if ((d = Vector3.Distance(c.transform.position, transform.position)) < distance)
-                {
-                   m_player = c;
-                   distance = d;
+                    float d = 0;
+                    if (!m_player)
+                    {
+                        m_player = c;
+                        distance = Vector3.Distance(c.transform.position, transform.position);
+                    }
+                    else if ((d = Vector3.Distance(c.transform.position, transform.position)) < distance)
+                    {
+                        m_player = c;
+                        distance = d;
+                    }
                 }
             }
+            else
+                return;
         }
 
         //Based on y difference, spawn stairs or spawn a new level
@@ -78,28 +85,49 @@ public class StairController : MonoBehaviour {
                     return;
                 }
 
-                int level = Random.Range(0, m_levels.Length);
-                while (level == m_lastLevel) { level = Random.Range(0, m_levels.Length); Debug.Log("Choosing Level"); }
-                Debug.Log("New level! Using level " + level + " out of " + m_levels.Length + ", last level was " + m_lastLevel);
-                m_lastLevel = level;
+                //Check win condition
+                if (FindObjectOfType<ScreenController>().getCameraCount() == 1)
+                {
+                    Vector3 p = new Vector3();
+                    foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())
+                        if (t.CompareTag("EndOfStairs"))
+                            p = t.position;
 
-                Vector3 pos = new Vector3();
-                foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())
-                    if (t.CompareTag("EndOfStairs"))
-                        pos = t.position;
+                    GameObject ob = Instantiate(m_winLevel, p, Quaternion.Euler(m_previous.transform.rotation.eulerAngles - new Vector3(0.0f, 90.0f, 0.0f)));
+                    foreach (Transform t in ob.GetComponentsInChildren<Transform>())
+                        if (t.CompareTag("StartOfStairs"))
+                            p = t.position;
 
-                GameObject o = Instantiate(m_levels[level], pos, Quaternion.Euler(m_previous.transform.rotation.eulerAngles - new Vector3(0.0f, 90.0f, 0.0f)));
-                foreach (Transform t in o.GetComponentsInChildren<Transform>())
-                    if (t.CompareTag("StartOfStairs"))
-                        pos = t.position;
+                    ob.transform.position = ob.transform.position + (ob.transform.position - p);
+                    m_previous = ob;
+                    m_old = true;
+                }
+                else
+                {
+                    int level = Random.Range(0, m_levels.Length);
+                    while (level == m_lastLevel) { level = Random.Range(0, m_levels.Length); Debug.Log("Choosing Level"); }
+                    Debug.Log("New level! Using level " + level + " out of " + m_levels.Length + ", last level was " + m_lastLevel);
+                    m_lastLevel = level;
 
-                o.transform.position = o.transform.position + (o.transform.position - pos);
-                o.GetComponentInChildren<StairController>().m_levels = m_levels;
-                o.GetComponentInChildren<StairController>().m_myLevel = o;
-                o.GetComponentInChildren<StairController>().m_lastLevel = m_lastLevel;
+                    Vector3 pos = new Vector3();
+                    foreach (Transform t in m_previous.GetComponentsInChildren<Transform>())
+                        if (t.CompareTag("EndOfStairs"))
+                            pos = t.position;
 
-                m_previous = o;
-                m_old = true;
+                    GameObject o = Instantiate(m_levels[level], pos, Quaternion.Euler(m_previous.transform.rotation.eulerAngles - new Vector3(0.0f, 90.0f, 0.0f)));
+                    foreach (Transform t in o.GetComponentsInChildren<Transform>())
+                        if (t.CompareTag("StartOfStairs"))
+                            pos = t.position;
+
+                    o.transform.position = o.transform.position + (o.transform.position - pos);
+                    o.GetComponentInChildren<StairController>().m_levels = m_levels;
+                    o.GetComponentInChildren<StairController>().m_myLevel = o;
+                    o.GetComponentInChildren<StairController>().m_lastLevel = m_lastLevel;
+                    o.GetComponentInChildren<StairController>().m_winLevel = m_winLevel;
+
+                    m_previous = o;
+                    m_old = true;
+                }
             }
         }
         else
