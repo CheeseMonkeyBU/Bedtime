@@ -152,7 +152,6 @@ public class ScreenController : MonoBehaviour
         for(int i = 0; i < m_cameras.Count; ++i)
         {
             cameraStartViewportX.Add(m_cameras[i].GetComponent<Camera>().rect.x);
-            Debug.Log(cameraStartViewportX[i]);
         }
 
         while (elapsedTime < m_transitionSpeed)
