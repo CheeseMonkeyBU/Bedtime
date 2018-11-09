@@ -56,8 +56,6 @@ public class PlayerController : MonoBehaviour {
                 Debug.Log("Player " + m_playerNumber + " targeting player 0 with current powerup");
 
                 usePowerup(0);
-
-                m_heldPower = Powerup.PowerupType.None;
             }
             else if (Input.GetButtonDown("PlayerB" + (m_playerNumber + 1).ToString()))
             {
@@ -65,8 +63,6 @@ public class PlayerController : MonoBehaviour {
                 Debug.Log("Player " + m_playerNumber + " targeting player 0 with current powerup");
 
                 usePowerup(1);
-
-                m_heldPower = Powerup.PowerupType.None;
             }
             else if (Input.GetButtonDown("PlayerX" + (m_playerNumber + 1).ToString()))
             {
@@ -74,8 +70,6 @@ public class PlayerController : MonoBehaviour {
                 Debug.Log("Player " + m_playerNumber + " targeting player 0 with current powerup");
 
                 usePowerup(2);
-
-                m_heldPower = Powerup.PowerupType.None;
             }
             else if (Input.GetButtonDown("PlayerY" + (m_playerNumber + 1).ToString()))
             {
@@ -83,8 +77,6 @@ public class PlayerController : MonoBehaviour {
                 Debug.Log("Player " + m_playerNumber + " targeting player 0 with current powerup");
 
                 usePowerup(3);
-
-                m_heldPower = Powerup.PowerupType.None;
             }
         }
 
@@ -149,9 +141,28 @@ public class PlayerController : MonoBehaviour {
 
     public void usePowerup(int _playerID)
     {
-        m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
-        m_gpController.applyPowerupToPlayer(_playerID, m_heldPower);
+        // If managed to use status effect
+        if(m_gpController.applyPowerupToPlayer(_playerID, m_heldPower))
+        {
+            Debug.Log("Applying Powerup");
+            m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
+            m_heldPower = Powerup.PowerupType.None;
+        }
+        // else, dont clear the icon, you still have it
     }
+
+    public bool canTakeStatusEffect()
+    {
+        if(m_hasStatusEffect == false && m_isInvincible == false)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
 
     public GameObject getCanvasGameObject()
