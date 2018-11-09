@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour {
     private float m_powerLength = 5.0f;
     private float m_elapsed;
 
+    private bool m_light = false;
+    private float m_battery = 15;
+
     private Rigidbody m_rb;
 	private Animator m_anim;
 
@@ -63,6 +66,26 @@ public class PlayerController : MonoBehaviour {
 				break;
 			}
 		}
+
+        if (Input.GetButtonDown("Light" + (m_playerNumber + 1).ToString()) && m_battery > 0)
+        {
+            Debug.Log("Light " + (m_playerNumber + 1).ToString());
+            m_light = !m_light;
+            GetComponent<Animator>().SetBool("Light", m_light);
+            GetComponentInChildren<Light>().enabled = m_light;
+        }
+
+        if (m_light)
+        {
+            m_battery -= Time.deltaTime;
+            if(m_battery <= 0)
+            {
+                m_light = false;
+                GetComponent<Animator>().SetBool("Light", m_light);
+                GetComponentInChildren<Light>().enabled = m_light;
+            }
+        }
+
 
 		//Player Movement code
 
