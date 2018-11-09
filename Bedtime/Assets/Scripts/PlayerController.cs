@@ -69,7 +69,6 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonDown("Light" + (m_playerNumber + 1).ToString()) && m_battery > 0)
         {
-            Debug.Log("Light " + (m_playerNumber + 1).ToString());
             m_light = !m_light;
             GetComponent<Animator>().SetBool("Light", m_light);
             GetComponentInChildren<Light>().enabled = m_light;
