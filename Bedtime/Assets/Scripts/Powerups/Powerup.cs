@@ -29,24 +29,28 @@ public class Powerup : MonoBehaviour
             m_modelFreeze.SetActive(true);
             m_modelSpeed.SetActive(false);
             m_modelInvincible.SetActive(false);
+            m_modelObstacle.SetActive(false);
         }
         if (type == PowerupType.Speed)
         {
             m_modelFreeze.SetActive(false);
             m_modelSpeed.SetActive(true);
             m_modelInvincible.SetActive(false);
+            m_modelObstacle.SetActive(false);
         }
         if (type == PowerupType.Invincible)
         {
             m_modelFreeze.SetActive(false);
             m_modelSpeed.SetActive(false);
             m_modelInvincible.SetActive(true);
+            m_modelObstacle.SetActive(false);
         }
         if (type == PowerupType.Obstacles)
         {
             m_modelFreeze.SetActive(false);
             m_modelSpeed.SetActive(false);
-            m_modelInvincible.SetActive(true);
+            m_modelInvincible.SetActive(false);
+            m_modelObstacle.SetActive(true);
         }
     }
 	
