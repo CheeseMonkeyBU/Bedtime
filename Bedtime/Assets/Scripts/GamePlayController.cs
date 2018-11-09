@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GamePlayController : MonoBehaviour {
 
@@ -25,7 +27,19 @@ public class GamePlayController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
 
+=======
+        PlayerController[] players = FindObjectsOfType<PlayerController>();
+        if (players.Length == 0)
+        {
+            RectTransform panel = FindObjectOfType<UIController>().getWinPanel();
+            panel.GetComponentInChildren<Image>().enabled = true;
+            panel.GetComponentInChildren<Image>().color = new Color(0, 0, 0, 1);
+            panel.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+            panel.GetComponentInChildren<TextMeshProUGUI>().text = "Darkness envelopes you";
+        }
+>>>>>>> fcf893b1adf75d38719085f2cd747c10644065bb
     }
 
     public void registerPlayer(PlayerController _player)
