@@ -9,6 +9,7 @@ TagManager:
   - EndOfStairs
   - SpawnPoint
   - SpawnObject
+  - EndOfGame
   layers:
   - Default
   - TransparentFX
