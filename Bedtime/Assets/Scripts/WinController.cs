@@ -9,6 +9,8 @@ public class WinController : MonoBehaviour {
 
     void OnTriggerEnter(Collider _other)
     {
+        if (_other.tag != "Player")
+            return;
         RectTransform winUI = FindObjectOfType<UIController>().getWinPanel();
         winUI.GetComponentInChildren<Image>().enabled = true;
         winUI.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
