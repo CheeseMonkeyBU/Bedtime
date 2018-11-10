@@ -73,12 +73,6 @@ public class SpawnController : MonoBehaviour
 
         GameObject player = Instantiate(m_playerGameObject);
 
-        if (!GameData.g_clusterMode || FindObjectsOfType<DarknessController>().Length == 0)
-        {
-            GameObject plane = Instantiate(m_killplane);
-            plane.GetComponent<DarknessController>().player = player;
-        }
-
         player.transform.position = m_spawnPoints[spawnPointIndex].transform.position;
         if (!GameData.g_clusterMode)
             m_spawnPoints.RemoveAt(spawnPointIndex);
@@ -98,5 +92,17 @@ public class SpawnController : MonoBehaviour
         playerController.m_canvas.GetComponent<CanvasController>().initialise();
          
         return player;
+    }
+
+    public void spawnDarkness()
+    {
+        if(GameData.g_clusterMode)
+            Instantiate(m_killplane);
+        else
+        {
+            PlayerController[] players = FindObjectsOfType<PlayerController>();
+            foreach(PlayerController p in players)
+                Instantiate(m_killplane).GetComponent<DarknessController>().player = p.gameObject;
+        }
     }
 }

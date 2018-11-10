@@ -28,6 +28,9 @@ public class GamePlayController : MonoBehaviour {
     public AudioSource invincibleSound;
     public AudioSource obstacleSound;
 
+    // Player death
+    public AudioSource m_deathSound;
+
     // Use this for initialization
     void Start ()
     {
@@ -266,6 +269,11 @@ public class GamePlayController : MonoBehaviour {
             }
             obstacles.Clear();
         }
+    }
+
+    public void OnPlayerDeath()
+    {
+        m_deathSound.Play();
     }
 
 
