@@ -28,6 +28,9 @@ public class GamePlayController : MonoBehaviour {
     public AudioSource invincibleSound;
     public AudioSource obstacleSound;
 
+    // Player death
+    public AudioSource m_deathSound;
+
     // Use this for initialization
     void Start ()
     {
@@ -230,6 +233,11 @@ public class GamePlayController : MonoBehaviour {
                 o.transform.position = _targetPlayer.m_recentStairController.GetComponent("EndOfStairs").transform.position;
             }
         }
+    }
+
+    public void OnPlayerDeath()
+    {
+        m_deathSound.Play();
     }
 
 
