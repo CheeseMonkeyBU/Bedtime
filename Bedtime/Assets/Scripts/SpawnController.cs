@@ -25,7 +25,7 @@ public class SpawnController : MonoBehaviour
             for(int i = 0; i < playerCount; i++)
                 Instantiate(m_startLevel, new Vector3(i * 200, 0, 0), Quaternion.identity);
         else
-            Instantiate(m_startLevel);
+            Instantiate(m_startLevel, new Vector3(0, 0, 0), Quaternion.identity);
 
 
         m_spawnPoints = new List<GameObject>();
