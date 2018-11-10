@@ -13,7 +13,7 @@ public class GamePlayController : MonoBehaviour {
     public float m_freezeTime = 3.0f;
 
     // speed settings
-    public float m_speedTime = 4.0f;
+    public float m_speedTime = 2.0f;
     public float m_speedMultiplyer = 4.0f;
 
     // invincible settings
@@ -163,25 +163,22 @@ public class GamePlayController : MonoBehaviour {
                 yield return new WaitForEndOfFrame();
             }
 
-            _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
+            // reset all effects and such
             _targetPlayer.m_hasStatusEffect = false;
             canvas.setStatusEffectRingPerc(1.0f);
             canvas.clearStatusEffectIcon();
 
-            // fade trail
+            // fade trail and speed
             elapsedTime = 0.0f;
             while (elapsedTime < 1.0f)
             {
                 trail.time = Mathf.SmoothStep(0.5f, 0, (elapsedTime / 1.0f));
+                _targetPlayer.m_speed = Mathf.SmoothStep(_targetPlayer.defaultSpeed * m_speedMultiplyer, _targetPlayer.defaultSpeed, (elapsedTime / 1.0f));
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
-
-
         }
-
-        //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
     public IEnumerator usePowerupInvincible(PlayerController _targetPlayer)
@@ -199,6 +196,7 @@ public class GamePlayController : MonoBehaviour {
             _targetPlayer.m_isInvincible = true;
             forceFieldMesh.enabled = true;
 
+            // wind the ring down
             float elapsedTime = 0.0f;
             while (elapsedTime < m_invincibleTime)
             {
@@ -231,9 +229,6 @@ public class GamePlayController : MonoBehaviour {
                 o.transform.position = _targetPlayer.m_recentStairController.GetComponent("EndOfStairs").transform.position;
             }
         }
-
-
-        //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
     }
 
 
