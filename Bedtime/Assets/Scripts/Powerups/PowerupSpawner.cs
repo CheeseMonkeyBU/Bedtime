@@ -9,7 +9,7 @@ public class PowerupSpawner : MonoBehaviour
     GameObject m_powerup;
 
     // spawn chance as a percentage
-    float SpawnChance = 0.333333333333f;
+    float SpawnChance = 1.0f;
 
 	// Use this for initialization
 	void Start ()

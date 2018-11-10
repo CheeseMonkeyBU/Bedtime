@@ -18,6 +18,10 @@ public class DarknessController : MonoBehaviour
         if (GameData.g_clusterMode)
         {
             PlayerController[] players = FindObjectsOfType<PlayerController>();
+            if(players.Length == 0)
+            {
+                return;
+            }
             float lowest = players[0].transform.position.y;
             player = players[0].gameObject;
             foreach (PlayerController p in players)
@@ -35,7 +39,7 @@ public class DarknessController : MonoBehaviour
             return;
         }
         gameObject.transform.position = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-        gameObject.transform.Translate(new Vector3(0, 6, 0) * Time.deltaTime);
+        gameObject.transform.Translate(new Vector3(0, 5, 0) * Time.deltaTime);
     }
 
     void OnTriggerEnter(Collider _collision)
