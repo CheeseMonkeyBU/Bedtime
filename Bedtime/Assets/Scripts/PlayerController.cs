@@ -179,6 +179,7 @@ public class PlayerController : MonoBehaviour {
 
     public void kill()
     {
+        FindObjectOfType<GamePlayController>().OnPlayerDeath();
         FindObjectOfType<ScreenController>().removeViewport(m_camera.gameObject);
         Destroy(gameObject);
     }

@@ -10,16 +10,26 @@ public class GamePlayController : MonoBehaviour {
 	public List<PlayerController> m_players;
 
     // freeze settings
-    public float m_freezeTime = 3.0f;
+    float m_freezeTime = 3.0f;
 
     // speed settings
-    public float m_speedTime = 2.0f;
-    public float m_speedMultiplyer = 4.0f;
+    float m_speedTime = 2.0f;
+    float m_speedMultiplyer = 4.0f;
+    float m_speedFade = 1.0f;
 
     // invincible settings
-    public float m_invincibleTime = 5.0f;
+    float m_invincibleTime = 5.0f;
 
     public GameObject m_obstacle;
+
+    // Powerup Audio
+    public AudioSource freezeSound;
+    public AudioSource speedSound;
+    public AudioSource invincibleSound;
+    public AudioSource obstacleSound;
+
+    // Player death
+    public AudioSource m_deathSound;
 
     // Use this for initialization
     void Start ()
@@ -95,6 +105,8 @@ public class GamePlayController : MonoBehaviour {
     {
         if(_targetPlayer.canTakeStatusEffect())
         {
+            freezeSound.Play();
+
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
             canvas.changeStatusEffectIcon(Powerup.PowerupType.Freeze);
@@ -133,6 +145,8 @@ public class GamePlayController : MonoBehaviour {
     {
         if (_targetPlayer.canTakeStatusEffect())
         {
+            speedSound.Play();
+
             // set the status effect on the canvas
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
@@ -148,6 +162,7 @@ public class GamePlayController : MonoBehaviour {
             while (elapsedTime < m_speedTime)
             {
                 canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_speedTime));
+                Debug.Log(elapsedTime + " / " + m_speedTime);
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
@@ -160,10 +175,10 @@ public class GamePlayController : MonoBehaviour {
 
             // fade trail and speed
             elapsedTime = 0.0f;
-            while (elapsedTime < 1.0f)
+            while (elapsedTime < m_speedFade)
             {
-                trail.time = Mathf.SmoothStep(0.5f, 0, (elapsedTime / 1.0f));
-                _targetPlayer.m_speed = Mathf.SmoothStep(_targetPlayer.defaultSpeed * m_speedMultiplyer, _targetPlayer.defaultSpeed, (elapsedTime / 1.0f));
+                trail.time = Mathf.SmoothStep(0.5f, 0, (elapsedTime / m_speedFade));
+                _targetPlayer.m_speed = Mathf.SmoothStep(_targetPlayer.defaultSpeed * m_speedMultiplyer, _targetPlayer.defaultSpeed, (elapsedTime / m_speedFade));
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
@@ -175,6 +190,8 @@ public class GamePlayController : MonoBehaviour {
     {
         if (_targetPlayer.canTakeStatusEffect())
         {
+            invincibleSound.Play();
+
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
             canvas.changeStatusEffectIcon(Powerup.PowerupType.Invincible);
@@ -217,6 +234,11 @@ public class GamePlayController : MonoBehaviour {
                 o.transform.position = _targetPlayer.m_recentStairController.GetComponent("EndOfStairs").transform.position;
             }
         }
+    }
+
+    public void OnPlayerDeath()
+    {
+        m_deathSound.Play();
     }
 
 
