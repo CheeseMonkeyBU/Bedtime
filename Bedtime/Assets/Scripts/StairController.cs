@@ -16,7 +16,7 @@ public class StairController : MonoBehaviour {
     private List<GameObject> m_stairs;
     public GameObject m_previous;
     private PlayerController m_player;
-    private bool m_old = false, m_playerSet = false;
+    private bool m_old = false, m_playerSet = false, m_dead = false;
 
 	void Start ()
     {
@@ -26,6 +26,9 @@ public class StairController : MonoBehaviour {
 	
 	void Update ()
     {
+        if (m_dead)
+            return;
+
         if (!GameData.g_clusterMode)
         {
             //Find closest player if m_player isn't set
@@ -83,13 +86,10 @@ public class StairController : MonoBehaviour {
             if (playerHeight < stairHeight || (lowestPlayerHeight < stairHeight && GameData.g_clusterMode))
                 return;
 
-            foreach (GameObject stair in m_stairs)
-                Destroy(stair);
-
-            if (m_myLevel)
-                Destroy(m_myLevel);
-            else
-                Destroy(this);
+            //foreach (GameObject stair in m_stairs)
+            //    Destroy(stair);
+            StartCoroutine(despawnStairs());
+            m_dead = true;
             return;
         }
 
@@ -190,5 +190,27 @@ public class StairController : MonoBehaviour {
             m_previous = Instantiate(m_stairPrefab, spawnPos, m_previous.transform.rotation);
         }
         m_stairs.Add(m_previous);
+    }
+
+    IEnumerator despawnStairs()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        float time = 0;
+        while (time < 3)
+        {
+            foreach (GameObject s in m_stairs)
+                s.transform.position += new Vector3(0, -Time.deltaTime * 10, 0);
+            time += Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        foreach (GameObject s in m_stairs)
+            Destroy(s);
+
+        if (m_myLevel)
+            Destroy(m_myLevel);
+        else
+            Destroy(this);
     }
 }
