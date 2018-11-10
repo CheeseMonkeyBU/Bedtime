@@ -30,6 +30,11 @@ public class DarknessController : MonoBehaviour
                 }
             }
         }
+        if (!player)
+        {
+            Destroy(gameObject);
+            return;
+        }
         gameObject.transform.position = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         gameObject.transform.Translate(new Vector3(0, 5, 0) * Time.deltaTime);
     }
