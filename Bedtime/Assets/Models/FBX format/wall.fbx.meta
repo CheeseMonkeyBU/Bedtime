@@ -13,7 +13,22 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: wall
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _defaultMat
+    second: {fileID: 2100000, guid: 8bbc29237a2697a4a86a71a26a4ab5e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalDark
+    second: {fileID: 2100000, guid: 16accf73726109644ba25f0f1ceac739, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood
+    second: {fileID: 2100000, guid: 00f16e0cc83478d47b09e08931f7115f, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
