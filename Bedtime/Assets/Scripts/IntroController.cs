@@ -37,6 +37,8 @@ public class IntroController : MonoBehaviour {
         m_mainLight.intensity = 0;
         Destroy(m_tvLight.transform.parent.gameObject);
 
+        yield return new WaitForSeconds(2);
+
         FindObjectOfType<SpawnController>().spawnDarkness();
     }
 }
