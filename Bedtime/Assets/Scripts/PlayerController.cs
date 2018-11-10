@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour {
     public bool m_hasStatusEffect = false;
     public bool m_isInvincible = false;
 
+    public bool m_inCutScene = false;
+
     public StairController m_recentStairController;
 
 	void Start () {
@@ -46,7 +48,9 @@ public class PlayerController : MonoBehaviour {
 
         m_heldPower = Powerup.PowerupType.Obstacles;
         m_battery = 15;
-	}
+
+        m_camera.transform.position = transform.position - (m_camera.transform.rotation * new Vector3(0.0f, 0.0f, 1.0f)) * 70.0f;
+    }
 
     void Update()
     {
@@ -83,10 +87,14 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        m_camera.transform.position = transform.position - (m_camera.transform.rotation * new Vector3(0.0f, 0.0f, 1.0f)) * 70.0f;
     }
 
     void FixedUpdate()
-    { 
+    {
+        if (m_inCutScene)
+            return;
+
         if (Input.GetButtonDown("Light" + (m_playerNumber + 1).ToString()) && m_battery > 0)
         {
             m_light = !m_light;
@@ -132,8 +140,6 @@ public class PlayerController : MonoBehaviour {
 		Vector3 horMotion = new Vector3(m_rb.velocity.x, 0.0f, m_rb.velocity.z);
 		horMotion = Mathf.Clamp(horMotion.magnitude, 0.0f, m_speed) * horMotion.normalized;
 		m_rb.velocity = new Vector3(horMotion.x, m_rb.velocity.y, horMotion.z);
-
-		m_camera.transform.position = transform.position - (m_camera.transform.rotation * new Vector3(0.0f, 0.0f, 1.0f)) * 50.0f;
 	}
 
     public void setCurrentHeldPowerup(Powerup.PowerupType _type)
@@ -173,6 +179,7 @@ public class PlayerController : MonoBehaviour {
 
     public void kill()
     {
+        FindObjectOfType<GamePlayController>().OnPlayerDeath();
         FindObjectOfType<ScreenController>().removeViewport(m_camera.gameObject);
         Destroy(gameObject);
     }

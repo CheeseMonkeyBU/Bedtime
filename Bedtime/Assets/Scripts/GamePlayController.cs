@@ -10,15 +10,15 @@ public class GamePlayController : MonoBehaviour {
 	public List<PlayerController> m_players;
 
     // freeze settings
-    public float m_freezeTime = 3.0f;
+    float m_freezeTime = 3.0f;
 
     // speed settings
-    public float m_speedTime = 5.0f;
-    public float m_speedMultiplyer = 4.0f;
-    public float m_speedFade = 0.5f;
+    float m_speedTime = 2.0f;
+    float m_speedMultiplyer = 4.0f;
+    float m_speedFade = 1.0f;
 
     // invincible settings
-    public float m_invincibleTime = 5.0f;
+    float m_invincibleTime = 5.0f;
 
     public GameObject m_obstacle;
 
@@ -27,6 +27,9 @@ public class GamePlayController : MonoBehaviour {
     public AudioSource speedSound;
     public AudioSource invincibleSound;
     public AudioSource obstacleSound;
+
+    // Player death
+    public AudioSource m_deathSound;
 
     // Use this for initialization
     void Start ()
@@ -159,6 +162,7 @@ public class GamePlayController : MonoBehaviour {
             while (elapsedTime < m_speedTime)
             {
                 canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_speedTime));
+                Debug.Log(elapsedTime + " / " + m_speedTime);
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
@@ -230,6 +234,11 @@ public class GamePlayController : MonoBehaviour {
                 o.transform.position = _targetPlayer.m_recentStairController.GetComponent("EndOfStairs").transform.position;
             }
         }
+    }
+
+    public void OnPlayerDeath()
+    {
+        m_deathSound.Play();
     }
 
 
