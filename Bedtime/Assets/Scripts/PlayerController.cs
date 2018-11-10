@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 
         defaultSpeed = m_speed;
 
-        m_heldPower = Powerup.PowerupType.Obstacles;
+        m_heldPower = Powerup.PowerupType.None;
         m_battery = 15;
 
         m_camera.transform.position = transform.position - (m_camera.transform.rotation * new Vector3(0.0f, 0.0f, 1.0f)) * 70.0f;

@@ -138,6 +138,10 @@ public class CanvasController : MonoBehaviour {
 
     public void setStatusEffectRingPerc(float _perc)
     {
+        if(m_statusEffectRing == null)
+        {
+            return;
+        }
         m_statusEffectRing.GetComponent<Image>().fillAmount = _perc;
     }
 

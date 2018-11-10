@@ -228,32 +228,31 @@ public class GamePlayController : MonoBehaviour {
 
             StairController[] stairs = FindObjectsOfType<StairController>();
             List<StairController> activeStairs = new List<StairController>();
-            GameObject correctPreviousStairs = new GameObject();
-
             List<GameObject> obstacles = new List<GameObject>();
+
+            GameObject closestStair = new GameObject();
+            float closestDistance = Mathf.Infinity;
 
             for (int i = 0; i < stairs.Length; ++i)
             {
-                if(!stairs[i].m_old)
+                float distance = Vector3.Distance(stairs[i].transform.position, _targetPlayer.transform.position);
+                if(distance < closestDistance)
                 {
-                    activeStairs.Add(stairs[i]);
+                    closestDistance = distance;
+                    closestStair = stairs[i].gameObject;
                 }
             }
 
-            for (int i = 0; i < activeStairs.Count; ++i)
-            {
-                if(activeStairs[i].m_player == _targetPlayer)
-                {
-                    Debug.Log("Setting the correct stairs");
-                    correctPreviousStairs = activeStairs[i].m_previous;
-                }
-            }
-
+            GameObject correctPreviousStairs = closestStair.GetComponent<StairController>().m_previous;
 
             float elapsedTime = 0.0f;
             while (elapsedTime < 10.0f)
             {
-                obstacles.Add(Instantiate(m_obstacle, correctPreviousStairs.transform.position + new Vector3(Random.Range(1, 6), 10, 0), Quaternion.identity));
+                if(correctPreviousStairs == null)
+                {
+                    break;
+                }
+                obstacles.Add(Instantiate(m_obstacle, correctPreviousStairs.transform.position + new Vector3(Random.Range(1, 6), 30, 0), Quaternion.identity));
 
 
                 elapsedTime += Time.deltaTime;
