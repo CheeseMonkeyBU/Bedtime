@@ -21,6 +21,12 @@ public class GamePlayController : MonoBehaviour {
 
     public GameObject m_obstacle;
 
+    // Powerup Audio
+    public AudioSource freezeSound;
+    public AudioSource speedSound;
+    public AudioSource invincibleSound;
+    public AudioSource obstacleSound;
+
     // Use this for initialization
     void Start ()
     {
@@ -95,6 +101,8 @@ public class GamePlayController : MonoBehaviour {
     {
         if(_targetPlayer.canTakeStatusEffect())
         {
+            freezeSound.Play();
+
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
             canvas.changeStatusEffectIcon(Powerup.PowerupType.Freeze);
@@ -133,6 +141,8 @@ public class GamePlayController : MonoBehaviour {
     {
         if (_targetPlayer.canTakeStatusEffect())
         {
+            speedSound.Play();
+
             // set the status effect on the canvas
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
@@ -178,6 +188,8 @@ public class GamePlayController : MonoBehaviour {
     {
         if (_targetPlayer.canTakeStatusEffect())
         {
+            invincibleSound.Play();
+
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
             canvas.changeStatusEffectIcon(Powerup.PowerupType.Invincible);
