@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour {
 
     public StairController m_recentStairController;
 
+    public AudioSource m_deathSound;
+
 	void Start () {
 		m_rb = GetComponent<Rigidbody>();
 		m_anim = GetComponent<Animator>();
@@ -173,6 +175,7 @@ public class PlayerController : MonoBehaviour {
 
     public void kill()
     {
+        m_deathSound.Play();
         FindObjectOfType<ScreenController>().removeViewport(m_camera.gameObject);
         Destroy(gameObject);
     }
