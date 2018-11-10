@@ -223,13 +223,48 @@ public class GamePlayController : MonoBehaviour {
     {
         if (!_targetPlayer.m_isInvincible)
         {
-            yield return new WaitForSeconds(1);
 
-            if (_targetPlayer.m_recentStairController != null)
+            StairController[] stairs = FindObjectsOfType<StairController>();
+            List<StairController> activeStairs = new List<StairController>();
+            GameObject correctPreviousStairs = new GameObject();
+
+            List<GameObject> obstacles = new List<GameObject>();
+
+            for (int i = 0; i < stairs.Length; ++i)
             {
-                GameObject o = Instantiate(m_obstacle);
-                o.transform.position = _targetPlayer.m_recentStairController.GetComponent("EndOfStairs").transform.position;
+                if(!stairs[i].m_old)
+                {
+                    activeStairs.Add(stairs[i]);
+                }
             }
+
+            for (int i = 0; i < activeStairs.Count; ++i)
+            {
+                if(activeStairs[i].m_player == _targetPlayer)
+                {
+                    Debug.Log("Setting the correct stairs");
+                    correctPreviousStairs = activeStairs[i].m_previous;
+                }
+            }
+
+
+            float elapsedTime = 0.0f;
+            while (elapsedTime < 10.0f)
+            {
+                obstacles.Add(Instantiate(m_obstacle, correctPreviousStairs.transform.position + new Vector3(Random.Range(1, 6), 10, 0), Quaternion.identity));
+
+
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            yield return new WaitForSeconds(5);
+
+            for(int i = 0; i < obstacles.Count; ++i)
+            {
+                Destroy(obstacles[i]);
+            }
+            obstacles.Clear();
         }
     }
 

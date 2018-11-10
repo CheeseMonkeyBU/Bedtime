@@ -15,8 +15,8 @@ public class StairController : MonoBehaviour {
 
     private List<GameObject> m_stairs;
     public GameObject m_previous;
-    private PlayerController m_player;
-    private bool m_old = false, m_playerSet = false, m_dead = false;
+    public PlayerController m_player;
+    public bool m_old = false, m_playerSet = false, m_dead = false;
 
 	void Start ()
     {
