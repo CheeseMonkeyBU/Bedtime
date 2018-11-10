@@ -9,7 +9,7 @@ public class PowerupSpawner : MonoBehaviour
     GameObject m_powerup;
 
     // spawn chance as a percentage
-    float SpawnChance = 1.333333333333f;
+    float SpawnChance = 0.333333333333f;
 
 	// Use this for initialization
 	void Start ()
@@ -21,7 +21,8 @@ public class PowerupSpawner : MonoBehaviour
             Vector3 spawnPosition = transform.position + new Vector3(0, 2.5f, 0);
             GameObject spawnedPowerup = Instantiate(m_powerup, spawnPosition, Quaternion.identity);
             Powerup powerup = spawnedPowerup.GetComponent<Powerup>();
-            int powerupType = Random.Range(0, powerup.maxPowerupIndex + 1);
+
+            int powerupType = Random.Range(0, 4);
             powerup.type = (Powerup.PowerupType)powerupType;
         }
         else
