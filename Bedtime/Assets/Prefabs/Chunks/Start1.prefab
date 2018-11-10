@@ -1170,7 +1170,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1458015290375634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.329563, y: 123.48003, z: -214.89975}
+  m_LocalPosition: {x: 435.61813, y: 535.6734, z: -214.89975}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4034838343398744}
@@ -3779,3 +3779,7 @@ MonoBehaviour:
   m_darkColor: {r: 0.36559254, g: 0.5002461, b: 0.7205882, a: 1}
   m_tvLight: {fileID: 108151822719289042}
   m_mainLight: {fileID: 108075419760528186}
+  dramaticBang: {fileID: 0}
+  shepardTone1: {fileID: 0}
+  shepardTone2: {fileID: 0}
+  clock: {fileID: 0}
