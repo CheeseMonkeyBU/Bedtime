@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 
 	public Powerup.PowerupType m_heldPower;
 
+    public GameObject m_icon;
+
     //[HideInInspector]
     public float m_speed = 8.0f;
     public float m_acceleration;
