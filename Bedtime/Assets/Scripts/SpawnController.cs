@@ -31,6 +31,7 @@ public class SpawnController : MonoBehaviour
         m_spawnPoints = new List<GameObject>();
         // look through all objects and find any that are spawn points and add them to the list of spawn points
         m_spawnPoints.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
+        Debug.Log("Found " + m_spawnPoints.Count + " spawn points");
 
         if(playerCount > 4 || playerCount < 0)
         {

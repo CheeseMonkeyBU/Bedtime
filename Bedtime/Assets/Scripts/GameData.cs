@@ -5,6 +5,6 @@ using UnityEngine;
 public static class GameData {
 
     public static int g_numberOfPlayers = 4;
-    public static bool g_clusterMode = false;
+    public static bool g_clusterMode = true;
 	
 }

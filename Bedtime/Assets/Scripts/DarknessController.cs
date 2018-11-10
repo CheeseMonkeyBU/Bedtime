@@ -10,7 +10,7 @@ public class DarknessController : MonoBehaviour
     void Awake()
     {
 
-        transform.position = new Vector3(0, -60, 0);
+        transform.position = new Vector3(0, -100, 0);
     }
 
     // Update is called once per frame
