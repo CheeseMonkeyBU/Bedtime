@@ -259,6 +259,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1381001150234554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4854987428137820}
+  - component: {fileID: 33141963724568096}
+  - component: {fileID: 23075132752589794}
+  m_Layer: 0
+  m_Name: arrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1440788696321068
 GameObject:
   m_ObjectHideFlags: 1
@@ -651,7 +668,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1128180689031338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.364204, y: 12.45955, z: -2.851827}
+  m_LocalPosition: {x: 207.56157, y: 226.1423, z: -567.4574}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4476321709296370}
@@ -663,6 +680,7 @@ Transform:
   - {fileID: 4167028666622540}
   - {fileID: 4724821012654064}
   - {fileID: 4339306080003616}
+  - {fileID: 4854987428137820}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1122,6 +1140,19 @@ Transform:
   m_Father: {fileID: 4275107406737638}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4854987428137820
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381001150234554}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -0, y: 20, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 4133820806624984}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4883008220872646
 Transform:
   m_ObjectHideFlags: 1
@@ -1162,6 +1193,40 @@ Transform:
   m_Father: {fileID: 4376929936765890}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23075132752589794
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381001150234554}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: adfb77c2c61fe4a4fbe26c52c3e35acf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23367259167471250
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1264,6 +1329,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33141963724568096
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381001150234554}
+  m_Mesh: {fileID: 4300000, guid: 867238f5bab1a034a9ac7e68e38a8bad, type: 3}
 --- !u!33 &33567669396161954
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1463,9 +1535,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fe37ca09e1ea042acedfa958b2bc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_aColor: {r: 0.27058825, g: 0.6313726, b: 0.27058825, a: 1}
+  m_bColor: {r: 0.9647059, g: 0.3647059, b: 0.23137255, a: 1}
+  m_xColor: {r: 0.22745098, g: 0.4745098, b: 0.9647059, a: 1}
+  m_yColor: {r: 0.92941177, g: 0.7647059, b: 0.19215687, a: 1}
   m_playerNumber: 0
   m_gpController: {fileID: 0}
   m_heldPower: 0
+  m_icon: {fileID: 1381001150234554}
   m_speed: 8
   m_acceleration: 4
   m_rotSpeed: 0
@@ -1478,9 +1555,8 @@ MonoBehaviour:
   m_maxBattery: 100
   m_hasStatusEffect: 0
   m_isInvincible: 0
+  m_inCutScene: 0
   m_recentStairController: {fileID: 0}
-  m_deathSound: {fileID: 82196428871616312, guid: 5f5706790b2164c48b9e4968f411a872,
-    type: 2}
 --- !u!136 &136344861281412450
 CapsuleCollider:
   m_ObjectHideFlags: 1

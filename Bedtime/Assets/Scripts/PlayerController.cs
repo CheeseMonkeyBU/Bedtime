@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    public Color m_aColor, m_bColor, m_xColor, m_yColor;
+
 	public int m_playerNumber;
 	public GamePlayController m_gpController;
 
@@ -52,6 +54,15 @@ public class PlayerController : MonoBehaviour {
         m_battery = 15;
 
         m_camera.transform.position = transform.position - (m_camera.transform.rotation * new Vector3(0.0f, 0.0f, 1.0f)) * 70.0f;
+
+        if (m_playerNumber == 0)
+            m_icon.GetComponent<MeshRenderer>().material.color = m_aColor;
+        else if (m_playerNumber == 1)
+            m_icon.GetComponent<MeshRenderer>().material.color = m_bColor;
+        else if (m_playerNumber == 2)
+            m_icon.GetComponent<MeshRenderer>().material.color = m_xColor;
+        else if (m_playerNumber == 3)
+            m_icon.GetComponent<MeshRenderer>().material.color = m_yColor;
     }
 
     void Update()
