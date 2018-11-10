@@ -173,11 +173,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &780950621
-
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -224,7 +222,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c03694cf0154244daf4ebb35145ade8, type: 2}
   m_IsPrefabParent: 0
-
 --- !u!1 &1454603733 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1207869564499050, guid: 1c03694cf0154244daf4ebb35145ade8,
@@ -237,7 +234,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1454603733}
   m_Enabled: 1
-
 --- !u!1 &1539728220
 GameObject:
   m_ObjectHideFlags: 0
