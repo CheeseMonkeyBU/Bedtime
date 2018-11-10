@@ -129,13 +129,16 @@ public class StairController : MonoBehaviour {
                         if (t.CompareTag("EndOfStairs"))
                             p = t.position;
 
-                    GameObject ob = Instantiate(m_winLevel, p, Quaternion.Euler(m_previous.transform.rotation.eulerAngles - new Vector3(0.0f, 90.0f, 0.0f)));
-                    foreach (Transform t in ob.GetComponentsInChildren<Transform>())
-                        if (t.CompareTag("StartOfStairs"))
-                            p = t.position;
+                    if (m_winLevel)
+                    {
+                        GameObject ob = Instantiate(m_winLevel, p, Quaternion.Euler(m_previous.transform.rotation.eulerAngles - new Vector3(0.0f, 90.0f, 0.0f)));
+                        foreach (Transform t in ob.GetComponentsInChildren<Transform>())
+                            if (t.CompareTag("StartOfStairs"))
+                                p = t.position;
 
-                    ob.transform.position = ob.transform.position + (ob.transform.position - p);
-                    m_previous = ob;
+                        ob.transform.position = ob.transform.position + (ob.transform.position - p);
+                        m_previous = ob;
+                    }
                     m_old = true;
                 }
                 else

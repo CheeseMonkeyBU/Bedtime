@@ -223,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1207869564499050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.137003, y: 9, z: -8.334121}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224949465954677050}
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_players: []
-  m_obstacle: {fileID: 0}
+  m_obstacle: {fileID: 1668815299057426, guid: 74cb4d3857265934d909c2922610815b, type: 2}
   freezeSound: {fileID: 82931459708104034}
   speedSound: {fileID: 82640319770971038}
   invincibleSound: {fileID: 82906501685467070}
@@ -905,7 +905,7 @@ MonoBehaviour:
   m_spawnPoints: []
   m_killplane: {fileID: 1947678599662636, guid: e54c17f53c2fa0d458175580a8dbc128,
     type: 2}
-  playerCount: 2
+  playerCount: 4
 --- !u!114 &114946213731310064
 MonoBehaviour:
   m_ObjectHideFlags: 1

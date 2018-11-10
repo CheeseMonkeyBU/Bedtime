@@ -74,10 +74,7 @@ public class SpawnController : MonoBehaviour
         GameObject player = Instantiate(m_playerGameObject);
 
         player.transform.position = m_spawnPoints[spawnPointIndex].transform.position;
-        if (!GameData.g_clusterMode)
-            m_spawnPoints.RemoveAt(spawnPointIndex);
-        else
-            player.transform.position += new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+        m_spawnPoints.RemoveAt(spawnPointIndex);
 
         PlayerController playerController = player.GetComponent<PlayerController>();
 

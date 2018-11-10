@@ -9,8 +9,7 @@ public class DarknessController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-
-        transform.position = new Vector3(0, -100, 0);
+        transform.position = new Vector3(0, -60, 0);
     }
 
     // Update is called once per frame
@@ -29,6 +28,11 @@ public class DarknessController : MonoBehaviour
                     player = p.gameObject;
                 }
             }
+        }
+        if (!player)
+        {
+            Destroy(gameObject);
+            return;
         }
         gameObject.transform.position = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         gameObject.transform.Translate(new Vector3(0, 5, 0) * Time.deltaTime);

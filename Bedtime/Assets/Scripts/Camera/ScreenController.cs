@@ -101,8 +101,11 @@ public class ScreenController : MonoBehaviour
             gameObject.GetComponent<UIController>().removeCanvasByCamera(_camera);
             Destroy(_camera);
             m_cameras.Remove(_camera);
-            Destroy(m_bars[index].gameObject);
-            m_bars.RemoveAt(index);
+            if (index < m_bars.Count)
+            {
+                Destroy(m_bars[index].gameObject);
+                m_bars.RemoveAt(index);
+            }
             StopCoroutine("removeLerpViewportReset");
             StartCoroutine("removeLerpViewportReset", _camera);
         }
