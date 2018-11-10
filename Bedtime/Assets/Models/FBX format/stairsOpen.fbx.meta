@@ -23,7 +23,12 @@ ModelImporter:
     4300000: stairsOpen
     4300002: Group
     4300004: Group
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woodDark
+    second: {fileID: 2100000, guid: a7bc90d789e5d3048b9dc61b17ad5f85, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
