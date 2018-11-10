@@ -99,6 +99,13 @@ public class GamePlayController : MonoBehaviour {
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
             canvas.changeStatusEffectIcon(Powerup.PowerupType.Freeze);
 
+            // turn on particles
+            ParticleSystem freezeParticles = _targetPlayer.iceBlock.GetComponent<ParticleSystem>();
+            MeshRenderer iceBlockMesh = _targetPlayer.iceBlock.GetComponent<MeshRenderer>();
+            ParticleSystem.EmissionModule em = freezeParticles.emission;
+            em.rateOverTime = 20.0f;
+            iceBlockMesh.enabled = true;
+
             _targetPlayer.m_speed = 0.0f;
 
             float elapsedTime = 0.0f; 
@@ -109,6 +116,9 @@ public class GamePlayController : MonoBehaviour {
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
+
+            em.rateOverTime = 0.0f;
+            iceBlockMesh.enabled = false;
 
             _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
 
@@ -123,11 +133,16 @@ public class GamePlayController : MonoBehaviour {
     {
         if (_targetPlayer.canTakeStatusEffect())
         {
+            // set the status effect on the canvas
             _targetPlayer.m_hasStatusEffect = true;
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
             canvas.changeStatusEffectIcon(Powerup.PowerupType.Speed);
 
             _targetPlayer.m_speed *= m_speedMultiplyer;
+
+            TrailRenderer trail = _targetPlayer.gameObject.GetComponent<TrailRenderer>();
+
+            trail.time = 0.5f;
 
             float elapsedTime = 0.0f;
             while (elapsedTime < m_speedTime)
@@ -139,10 +154,21 @@ public class GamePlayController : MonoBehaviour {
             }
 
             _targetPlayer.m_speed = _targetPlayer.defaultSpeed;
-
             _targetPlayer.m_hasStatusEffect = false;
             canvas.setStatusEffectRingPerc(1.0f);
-            _targetPlayer.m_canvas.GetComponent<CanvasController>().clearStatusEffectIcon();
+            canvas.clearStatusEffectIcon();
+
+            // fade trail
+            elapsedTime = 0.0f;
+            while (elapsedTime < 1.0f)
+            {
+                trail.time = Mathf.SmoothStep(0.5f, 0, (elapsedTime / 1.0f));
+
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+
         }
 
         //_targetPlayer.m_canvas.GetComponent<CanvasController>().clearPowerupIcon();
@@ -156,7 +182,10 @@ public class GamePlayController : MonoBehaviour {
             CanvasController canvas = _targetPlayer.m_canvas.GetComponent<CanvasController>();
             canvas.changeStatusEffectIcon(Powerup.PowerupType.Invincible);
 
+            MeshRenderer forceFieldMesh = _targetPlayer.forceField.GetComponent<MeshRenderer>();
+
             _targetPlayer.m_isInvincible = true;
+            forceFieldMesh.enabled = true;
 
             float elapsedTime = 0.0f;
             while (elapsedTime < m_invincibleTime)
@@ -168,6 +197,7 @@ public class GamePlayController : MonoBehaviour {
             }
 
             _targetPlayer.m_isInvincible = false;
+            forceFieldMesh.enabled = false;
 
             _targetPlayer.m_hasStatusEffect = false;
             canvas.setStatusEffectRingPerc(1.0f);

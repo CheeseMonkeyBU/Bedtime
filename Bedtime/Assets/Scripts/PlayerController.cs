@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour {
     public Camera m_camera;
     public Canvas m_canvas;
 
+    public GameObject iceBlock;
+    public GameObject forceField;
+
     //public float m_powerLength = 5.0f;
     private float m_elapsed;
 
@@ -162,8 +165,6 @@ public class PlayerController : MonoBehaviour {
             return false;
         }
     }
-
-
 
     public GameObject getCanvasGameObject()
     {
