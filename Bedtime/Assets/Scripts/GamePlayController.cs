@@ -31,6 +31,11 @@ public class GamePlayController : MonoBehaviour {
     // Player death
     public AudioSource m_deathSound;
 
+    // Music
+    public AudioSource dramaticBang;
+    public AudioSource shepardTone1;
+    public AudioSource shepardTone2;
+
     // Use this for initialization
     void Start ()
     {
@@ -272,6 +277,21 @@ public class GamePlayController : MonoBehaviour {
     public void OnPlayerDeath()
     {
         m_deathSound.Play();
+    }
+
+    public void PlayDramaticBang()
+    {
+        dramaticBang.Play();
+    }
+
+    public void PlayShepardTone1()
+    {
+        shepardTone1.Play();
+    }
+
+    public void PlayShepardTone2()
+    {
+        shepardTone2.Play();
     }
 
 

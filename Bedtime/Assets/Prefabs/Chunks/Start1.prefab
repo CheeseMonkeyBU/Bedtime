@@ -3779,3 +3779,7 @@ MonoBehaviour:
   m_darkColor: {r: 0.36559254, g: 0.5002461, b: 0.7205882, a: 1}
   m_tvLight: {fileID: 108151822719289042}
   m_mainLight: {fileID: 108075419760528186}
+  dramaticBang: {fileID: 0}
+  shepardTone1: {fileID: 0}
+  shepardTone2: {fileID: 0}
+  m_clock: {fileID: 114563594685375462, guid: 85b8bbfa615f66d4bb331b99c13a75c0, type: 2}

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour {
 
     [SerializeField]
-    Canvas m_screenCanvas;
+    public Canvas m_screenCanvas;
 
     List<GameObject> m_playerCanvas;
 
