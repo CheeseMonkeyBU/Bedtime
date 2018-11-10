@@ -13,8 +13,9 @@ public class GamePlayController : MonoBehaviour {
     public float m_freezeTime = 3.0f;
 
     // speed settings
-    public float m_speedTime = 2.0f;
+    public float m_speedTime = 5.0f;
     public float m_speedMultiplyer = 4.0f;
+    public float m_speedFade = 0.5f;
 
     // invincible settings
     public float m_invincibleTime = 5.0f;
@@ -170,10 +171,10 @@ public class GamePlayController : MonoBehaviour {
 
             // fade trail and speed
             elapsedTime = 0.0f;
-            while (elapsedTime < 1.0f)
+            while (elapsedTime < m_speedFade)
             {
-                trail.time = Mathf.SmoothStep(0.5f, 0, (elapsedTime / 1.0f));
-                _targetPlayer.m_speed = Mathf.SmoothStep(_targetPlayer.defaultSpeed * m_speedMultiplyer, _targetPlayer.defaultSpeed, (elapsedTime / 1.0f));
+                trail.time = Mathf.SmoothStep(0.5f, 0, (elapsedTime / m_speedFade));
+                _targetPlayer.m_speed = Mathf.SmoothStep(_targetPlayer.defaultSpeed * m_speedMultiplyer, _targetPlayer.defaultSpeed, (elapsedTime / m_speedFade));
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
