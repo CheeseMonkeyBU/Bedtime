@@ -19,10 +19,14 @@ public class SpawnController : MonoBehaviour
 
     void Start()
     {
-        playerCount = NumberOfPlayers.numberOfPlayers;
+        playerCount = GameData.g_numberOfPlayers;
 
-        for(int i = 0; i < playerCount; i++)
-            Instantiate(m_startLevel, new Vector3(i * 200, 0, 0), Quaternion.identity);
+        if(!GameData.g_clusterMode)
+            for(int i = 0; i < playerCount; i++)
+                Instantiate(m_startLevel, new Vector3(i * 200, 0, 0), Quaternion.identity);
+        else
+            Instantiate(m_startLevel);
+
 
         m_spawnPoints = new List<GameObject>();
         // look through all objects and find any that are spawn points and add them to the list of spawn points
@@ -34,7 +38,7 @@ public class SpawnController : MonoBehaviour
             playerCount = 2;
         }
 
-        if(m_spawnPoints.Count < playerCount)
+        if(m_spawnPoints.Count < playerCount && !GameData.g_clusterMode)
         {
             Debug.LogError("Not enough spawn points for the number of players!");
             playerCount = m_spawnPoints.Count;
@@ -66,15 +70,19 @@ public class SpawnController : MonoBehaviour
     {
         int spawnPointIndex = Random.Range(0, m_spawnPoints.Count - 1);
 
-
-
         GameObject player = Instantiate(m_playerGameObject);
 
-        GameObject plane = Instantiate(m_killplane);
-        plane.GetComponent<DarknessController>().player = player;
+        if (!GameData.g_clusterMode || FindObjectsOfType<DarknessController>().Length == 0)
+        {
+            GameObject plane = Instantiate(m_killplane);
+            plane.GetComponent<DarknessController>().player = player;
+        }
 
         player.transform.position = m_spawnPoints[spawnPointIndex].transform.position;
-        m_spawnPoints.RemoveAt(spawnPointIndex);
+        if (!GameData.g_clusterMode)
+            m_spawnPoints.RemoveAt(spawnPointIndex);
+        else
+            player.transform.position += new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
 
         PlayerController playerController = player.GetComponent<PlayerController>();
 

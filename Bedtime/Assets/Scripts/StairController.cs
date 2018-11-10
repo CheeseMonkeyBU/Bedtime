@@ -26,44 +26,61 @@ public class StairController : MonoBehaviour {
 	
 	void Update ()
     {
-        //Find closest player if m_player isn't set
-        if(!m_player)
+        if (!GameData.g_clusterMode)
         {
-            if (!m_playerSet)
+            //Find closest player if m_player isn't set
+            if (!m_player)
             {
-                m_playerSet = true;
-                PlayerController[] chars = FindObjectsOfType<PlayerController>();
-                if (chars.Length == 0)
-                    Debug.LogError("No players!");
-                float distance = 0;
-                foreach (PlayerController c in chars)
+                if (!m_playerSet)
                 {
-                    float d = 0;
-                    if (!m_player)
+                    m_playerSet = true;
+                    PlayerController[] chars = FindObjectsOfType<PlayerController>();
+                    if (chars.Length == 0)
+                        Debug.LogError("No players!");
+                    float distance = 0;
+                    foreach (PlayerController c in chars)
                     {
-                        m_player = c;
-                        distance = Vector3.Distance(c.transform.position, transform.position);
+                        float d = 0;
+                        if (!m_player)
+                        {
+                            m_player = c;
+                            distance = Vector3.Distance(c.transform.position, transform.position);
+                        }
+                        else if ((d = Vector3.Distance(c.transform.position, transform.position)) < distance)
+                        {
+                            m_player = c;
+                            distance = d;
+                        }
                     }
-                    else if ((d = Vector3.Distance(c.transform.position, transform.position)) < distance)
-                    {
-                        m_player = c;
-                        distance = d;
-                    }
+
+                    m_player.m_recentStairController = this;
                 }
-
-                m_player.m_recentStairController = this;
+                else
+                    return;
             }
-            else
-                return;
         }
-
         bool won = FindObjectOfType<ScreenController>().getCameraCount() == 1;
 
         //Based on y difference, spawn stairs or spawn a new level
-        float stairHeight = m_previous.transform.position.y, playerHeight = m_player.transform.position.y;
+        float stairHeight = m_previous.transform.position.y, playerHeight = 0, lowestPlayerHeight = 0;
+        PlayerController[] players = FindObjectsOfType<PlayerController>();
+        if (GameData.g_clusterMode && players.Length > 0)
+        {
+            playerHeight = players[0].transform.position.y;
+            lowestPlayerHeight = playerHeight;
+            foreach (PlayerController p in players)
+                if (p.transform.position.y > playerHeight)
+                    playerHeight = p.transform.position.y;
+                else if (p.transform.position.y < lowestPlayerHeight)
+                    lowestPlayerHeight = p.transform.position.y;
+        }
+        else if(!GameData.g_clusterMode)
+            playerHeight = m_player.transform.position.y;
+
         if(m_old)
         {
-            if (playerHeight < stairHeight)
+
+            if (playerHeight < stairHeight || (lowestPlayerHeight < stairHeight && GameData.g_clusterMode))
                 return;
 
             foreach (GameObject stair in m_stairs)
@@ -75,10 +92,25 @@ public class StairController : MonoBehaviour {
                 Destroy(this);
             return;
         }
+
+        if (GameData.g_clusterMode)
+        {
+            foreach (PlayerController p in players)
+            {
+                if(p.transform.position.y > transform.position.y + 5)
+                    p.m_camera.GetComponent<CameraController>().setOrthoSize(m_stairCamSize, 0.2f);
+                else
+                    p.m_camera.GetComponent<CameraController>().setOrthoSize(m_floorCamSize, 0.2f);
+            }
+        }
+
         if (playerHeight > transform.position.y + 5)
         {
-            m_player.m_camera.GetComponent<CameraController>().setOrthoSize(m_stairCamSize, 0.2f);
-            if (stairHeight - playerHeight < m_player.m_camera.orthographicSize / 2)
+            
+            if(!GameData.g_clusterMode)
+                m_player.m_camera.GetComponent<CameraController>().setOrthoSize(m_stairCamSize, 0.2f);
+
+            if (stairHeight - playerHeight < m_stairCamSize / 2)
                 spawnStair();
             if (playerHeight > transform.position.y + 70)
             {
@@ -134,7 +166,7 @@ public class StairController : MonoBehaviour {
                 }
             }
         }
-        else
+        else if(!GameData.g_clusterMode)
             m_player.m_camera.GetComponent<CameraController>().setOrthoSize(m_floorCamSize, 0.2f);
         
 	}
