@@ -25,19 +25,19 @@ public class NoOfPlayersButtonsScript : MonoBehaviour {
 
     public void TwoPlayers()
     {
-        NumberOfPlayers.numberOfPlayers = 2;
+        GameData.g_numberOfPlayers = 2;
         SceneManager.LoadScene(sceneName);
     }
 
     public void ThreePlayers()
     {
-        NumberOfPlayers.numberOfPlayers = 3;
+        GameData.g_numberOfPlayers = 3;
         SceneManager.LoadScene(sceneName);
     }
 
     public void FourPlayers()
     {
-        NumberOfPlayers.numberOfPlayers = 4;
+        GameData.g_numberOfPlayers = 4;
         SceneManager.LoadScene(sceneName);
     }
 }
