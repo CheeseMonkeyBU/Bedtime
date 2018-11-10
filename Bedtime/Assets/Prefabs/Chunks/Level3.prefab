@@ -665,6 +665,7 @@ GameObject:
   - component: {fileID: 33609585792841874}
   - component: {fileID: 23607918472045684}
   - component: {fileID: 65387094895926352}
+  - component: {fileID: 65078531767221002}
   m_Layer: 0
   m_Name: loungeDesignSofaCorner
   m_TagString: Untagged
@@ -4463,6 +4464,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 0.5, z: 10}
   m_Center: {x: 4.9999924, y: 0.25, z: 5}
+--- !u!65 &65078531767221002
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1499645209020714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.1685944, y: 4, z: 13.49829}
+  m_Center: {x: 11.413994, y: 2, z: 6.749145}
 --- !u!65 &65132878464414222
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4581,8 +4594,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.49829, y: 4, z: 13.49829}
-  m_Center: {x: 6.749145, y: 2, z: 6.749145}
+  m_Size: {x: 13.49829, y: 4, z: 4.0676975}
+  m_Center: {x: 6.749145, y: 2, z: 11.464442}
 --- !u!65 &65389753302575488
 BoxCollider:
   m_ObjectHideFlags: 1
