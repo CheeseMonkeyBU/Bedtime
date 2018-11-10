@@ -162,7 +162,6 @@ public class GamePlayController : MonoBehaviour {
             while (elapsedTime < m_speedTime)
             {
                 canvas.setStatusEffectRingPerc(1.0f - (elapsedTime / m_speedTime));
-                Debug.Log(elapsedTime + " / " + m_speedTime);
 
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
